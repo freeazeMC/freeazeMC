@@ -2,18 +2,16 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>ANONİMBEY</title>
     <link rel="stylesheet" href="style.css">
+    <title>ANONİMBEY</title>
 </head>
 <body>
-    <div id="overlay">
-        <div class="modal">
-            <h1>ANONİMBEY</h1>
-            <p>Bu platform tamamen anonimdir. Paylaşılan içeriklerden kullanıcılar sorumludur. +18 içerik ihtimalini kabul ederek giriş yapıyorsunuz.</p>
-            <button onclick="document.getElementById('overlay').style.display='none'">GİRİŞ YAP</button>
+    <div class="container">
+        <h1>ANONİMBEY</h1>
+        <div class="input-area">
+            <textarea id="mesajInput" placeholder="Bir şeyler yaz..."></textarea>
+            <button id="gonderBtn">GÖNDER</button>
         </div>
-    </div>
-    <div id="app">
         <div id="feed"></div>
     </div>
     <script type="module" src="script.js"></script>
