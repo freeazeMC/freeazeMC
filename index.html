@@ -2,18 +2,32 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberVault | Intelligence Ops</title>
+    
+    <!-- AdSense Doğrulama Kodu: -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3581301294764999" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="style.css">
-    <title>ANONİMBEY</title>
 </head>
 <body>
-    <div class="container">
-        <h1>ANONİMBEY</h1>
-        <div class="input-area">
-            <textarea id="mesajInput" placeholder="Bir şeyler yaz..."></textarea>
-            <button id="gonderBtn">GÖNDER</button>
-        </div>
-        <div id="feed"></div>
-    </div>
+    <nav>
+        <a href="#vulnerability">Vulnerability</a> <a href="#dead-drop">Dead-Drop</a>
+        <a href="#threat-intel">Threat-Intel</a> <a href="#system-logs">System-Logs</a>
+        <a href="#ip-tracker">IP-Tracker</a> <a href="#exploit-db">Exploit-DB</a>
+        <a href="#osint">OSINT</a> <a href="#crypto">Crypto-Tools</a>
+        <a href="#net-stats">Net-Stats</a> <a href="#partners">Partners</a>
+    </nav>
+
+    <main>
+        <section id="vulnerability"><h2>Vulnerability Report</h2><textarea id="vuln-input" placeholder="Raporu gir..."></textarea><button onclick="submitData('vulnerabilities', 'vuln-input')">GÖNDER</button></section>
+        <section id="dead-drop"><h2>Encrypted Dead-Drop</h2><textarea id="drop-input" placeholder="Veri bırak..."></textarea><button onclick="submitData('dead-drops', 'drop-input')">YÜKLE</button></section>
+        <section id="threat-intel"><h2>Threat-Intel Feed</h2><div class="panel">Canlı veri akışı: Aktif.</div></section>
+        <section id="partners">
+            <h2>Partners (AdSense)</h2>
+            <div class="ad-container" style="padding:20px; border:1px dashed #0f0;">REKLAM ALANI</div>
+        </section>
+    </main>
     <script type="module" src="script.js"></script>
 </body>
 </html>
