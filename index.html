@@ -3,31 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberVault | Intelligence Ops</title>
+    <title>NodeGuard - OSINT & Güvenlik Platformu</title>
     
-    <!-- AdSense Doğrulama Kodu: -->
+    <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3581301294764999" crossorigin="anonymous"></script>
-
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-        <a href="#vulnerability">Vulnerability</a> <a href="#dead-drop">Dead-Drop</a>
-        <a href="#threat-intel">Threat-Intel</a> <a href="#system-logs">System-Logs</a>
-        <a href="#ip-tracker">IP-Tracker</a> <a href="#exploit-db">Exploit-DB</a>
-        <a href="#osint">OSINT</a> <a href="#crypto">Crypto-Tools</a>
-        <a href="#net-stats">Net-Stats</a> <a href="#partners">Partners</a>
+    <!-- Top Banner Ad -->
+    <div class="ad-banner">
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-client="ca-pub-3581301294764999"
+             data-ad-slot="YOUR_AD_SLOT_1"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">NodeGuard</div>
+        <div class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#" class="active">OSINT Tarama</a>
+            <a href="#">Raporlar</a>
+            <a href="#">IP Logger</a>
+            <a href="#">Ekip (234)</a>
+        </div>
+        <div class="status">14 Ülke • VPN Aktif</div>
     </nav>
 
-    <main>
-        <section id="vulnerability"><h2>Vulnerability Report</h2><textarea id="vuln-input" placeholder="Raporu gir..."></textarea><button onclick="submitData('vulnerabilities', 'vuln-input')">GÖNDER</button></section>
-        <section id="dead-drop"><h2>Encrypted Dead-Drop</h2><textarea id="drop-input" placeholder="Veri bırak..."></textarea><button onclick="submitData('dead-drops', 'drop-input')">YÜKLE</button></section>
-        <section id="threat-intel"><h2>Threat-Intel Feed</h2><div class="panel">Canlı veri akışı: Aktif.</div></section>
-        <section id="partners">
-            <h2>Partners (AdSense)</h2>
-            <div class="ad-container" style="padding:20px; border:1px dashed #0f0;">REKLAM ALANI</div>
-        </section>
-    </main>
-    <script type="module" src="script.js"></script>
+    <div class="container">
+        <h1 class="main-title">OSINT & Site Analiz Sistemi</h1>
+        <p class="subtitle">Hedef site hakkında detaylı istihbarat ve güvenlik analizi</p>
+
+        <div class="search-box">
+            <input type="text" id="urlInput" class="url-input" placeholder="https://example.com" value="https://example.com">
+            <button onclick="startOSINT()" class="btn-primary">OSINT TARAMASI BAŞLAT</button>
+        </div>
+
+        <!-- Second Ad -->
+        <div class="ad-banner" style="margin: 25px 0;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3581301294764999"
+                 data-ad-slot="YOUR_AD_SLOT_2"
+                 data-ad-format="rectangle"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div id="results" class="results">
+            <div class="card">
+                <h3>Tarama Logu</h3>
+                <div id="log" class="log-area"></div>
+            </div>
+
+            <div class="card">
+                <h3>OSINT Raporu</h3>
+                <div id="report" class="report-area"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
