@@ -3,69 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>NodeGuard - OSINT & Güvenlik Platformu</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #0a0a0a; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        
-        /* Navbar */
-        .navbar { background: #121212; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
-        .logo { font-size: 26px; font-weight: bold; color: #00bfff; }
-        .nav-links a { color: #aaa; margin: 0 16px; text-decoration: none; font-weight: 500; cursor: pointer; }
-        .nav-links a:hover, .nav-links a.active { color: #00bfff; }
-
-        /* İçerik Boyutları (Orijinal Tasarım) */
-        .container { max-width: 1100px; margin: 60px auto; padding: 0 20px; }
-        .main-title { font-size: 42px; color: #ffffff; text-align: center; margin-bottom: 10px; }
-        .subtitle { color: #777; text-align: center; margin-bottom: 40px; font-size: 18px; }
-        
-        .card { background: #161616; border: 1px solid #333; border-radius: 8px; padding: 30px; margin-bottom: 25px; }
-        .page { display: none; }
-        #dashboard { display: block; }
-
-        /* Input ve Butonlar */
-        .search-box { display: flex; gap: 12px; max-width: 700px; margin: 0 auto 30px; }
-        .url-input { flex: 1; padding: 18px; background: #1f1f1f; border: 1px solid #444; color: white; font-size: 17px; border-radius: 6px; }
-        .btn-primary { padding: 18px 40px; background: #0066cc; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo"><span>&gt;_</span> NodeGuard</div>
+        <div class="logo">&gt;_ NodeGuard</div>
         <div class="nav-links">
-            <a onclick="showPage('dashboard', this)">Dashboard</a>
+            <a onclick="showPage('dashboard', this)" class="active">Dashboard</a>
             <a onclick="showPage('osint-page', this)">OSINT 2026</a>
             <a onclick="showPage('ip-page', this)">IP Sorgu</a>
-            <a onclick="showPage('license-page', this)">Lisans & Telif</a>
         </div>
     </nav>
 
     <div id="dashboard" class="page">
         <div class="container">
-            <h1 class="main-title">NodeGuard</h1>
-            <p class="subtitle">Profesyonel OSINT ve Siber Güvenlik İstihbarat Platformu</p>
             <div class="card">
-                <h2>Hakkımızda</h2>
-                <p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir güvenlik ve istihbarat aracıdır.</p>
+                <h1 class="main-title">NodeGuard</h1>
+                <p style="line-height: 1.6; margin-bottom: 10px;">NodeGuard, internet üzerindeki açık kaynaklı verileri (OSINT) analiz etmek, IP adreslerini izlemek ve siber tehditleri erkenden tespit etmek için Rxc Team tarafından geliştirilmiş profesyonel bir istihbarat platformudur. Platform, şüpheli ağ aktivitelerini takip etme, dijital ayak izi tarama ve gelişmiş güvenlik raporlama süreçlerini tek bir merkezde toplar.</p>
+                <a href="https://www.mediafire.com/file/yvu14y5enibz2zr/Tru_Mail_.apk/file" target="_blank" class="btn-download">Tru Mail İndir</a>
+            </div>
+            
+            <div class="card">
+                <h2>İsmi Geçenler</h2>
+                <div class="scrolling-container">
+                    <div class="scrolling-text">
+                        NodeGuard Developer<br>Onnly Freeaze<br>Rxc Team<br>Rxc Datav<br>Berkcxn<br>freeaze tiktok<br>Teşekkürler...
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="osint-page" class="page">
-        <div class="container">
-            <h1 class="main-title">OSINT Tarama</h1>
-            <div class="search-box">
-                <input type="text" id="targetInput" class="url-input" placeholder="Hedef Domain veya IP">
-                <button onclick="startFullScan()" class="btn-primary">OSINT Tara</button>
-            </div>
-        </div>
-    </div>
+    <!-- Diğer sayfalar aynı şekilde kalabilir -->
+    <div id="osint-page" class="page"><div class="container"><div class="card"><h1>OSINT Paneli</h1></div></div></div>
+    <div id="ip-page" class="page"><div class="container"><div class="card"><h1>IP Sorgu</h1></div></div></div>
 
     <script>
         function showPage(id, el) {
             document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.getElementById(id).style.display = 'block';
             el.classList.add('active');
         }
     </script>
