@@ -19,9 +19,10 @@
         </div>
         <div class="nav-links">
             <a href="#" onclick="showDashboard()">Dashboard</a>
-            <a href="#" onclick="showOSINT()" class="active">OSINT ve IP Çözümleri</a>
+            <a href="#" onclick="showOSINT()" class="active">OSINT</a>
+            <a href="#" onclick="showIPQuery()">IP Sorgu</a>
+            <a href="#" onclick="showLicense()">Lisans & Telif</a>
         </div>
-        <div class="status">VPN Aktif • 234 Kullanıcı</div>
     </nav>
 
     <!-- DASHBOARD -->
@@ -32,19 +33,7 @@
 
             <div class="card">
                 <h2>Hakkımızda</h2>
-                <p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir OSINT ve güvenlik analiz aracıdır.</p>
-            </div>
-
-            <div class="card">
-                <h2>İsmi Geçenler</h2>
-                <div id="credits" class="credits"></div>
-            </div>
-
-            <div class="card">
-                <h2>Tru Mail</h2>
-                <a href="https://www.mediafire.com/file/yvu14y5enibz2zr/Tru_Mail_.apk/file" target="_blank" class="btn-download">
-                    ↓ Tru Mail APK İndir
-                </a>
+                <p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir güvenlik ve istihbarat aracıdır.</p>
             </div>
         </div>
     </div>
@@ -52,22 +41,53 @@
     <!-- OSINT SAYFASI -->
     <div id="osint-page" class="page" style="display: none;">
         <div class="container">
-            <h1 class="main-title">OSINT ve IP Çözümleri</h1>
-
+            <h1 class="main-title">OSINT Tarama</h1>
             <div class="search-box">
-                <input type="text" id="targetInput" class="url-input" placeholder="https://example.com veya IP adresi girin">
-                <button onclick="startFullScan()" class="btn-primary">Sorgula</button>
+                <input type="text" id="targetInput" class="url-input" placeholder="https://example.com">
+                <button onclick="startFullScan()" class="btn-primary">OSINT Tara</button>
             </div>
-
             <div id="results" class="results">
                 <div class="card">
                     <h3>Tarama Logu</h3>
                     <div id="log" class="log-area"></div>
                 </div>
                 <div class="card">
-                    <h3>Detaylı Rapor</h3>
+                    <h3>Rapor</h3>
                     <div id="report" class="report-area"></div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IP SORGULAMA SAYFASI -->
+    <div id="ip-page" class="page" style="display: none;">
+        <div class="container">
+            <h1 class="main-title">IP Sorgu</h1>
+            <div class="search-box">
+                <input type="text" id="ipInput" class="url-input" placeholder="185.164.XXX.XXX veya IP adresi">
+                <button onclick="startIPQuery()" class="btn-primary">IP Sorgula</button>
+            </div>
+            <div id="ip-results" class="results">
+                <div class="card">
+                    <div id="ip-report" class="report-area"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LİSANS & TELİF -->
+    <div id="license-page" class="page" style="display: none;">
+        <div class="container">
+            <h1 class="main-title">Lisans & Telif Hakkı</h1>
+            <div class="card">
+                <h2>İsmi Geçenler</h2>
+                <div id="credits" class="credits"></div>
+            </div>
+            <div class="card">
+                <h2>Telif Hakkı ve Lisans Sözleşmesi</h2>
+                <p>NodeGuard © 2026 NodeGuard Developer (Rxc Team) tarafından geliştirilmiştir. Tüm hakları saklıdır.</p>
+                <p>Bu araç yalnızca yetkili ekip üyeleri tarafından kullanılabilir. İzinsiz kopyalama, dağıtma veya ticari kullanım yasaktır.</p>
+                <p>Her türlü hukuki sorumluluk kullanıcısına aittir.</p>
             </div>
         </div>
     </div>
