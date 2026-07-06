@@ -1,13 +1,9 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     background: #0a0a0a;
     color: #e0e0e0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 .navbar {
@@ -19,53 +15,25 @@ body {
     border-bottom: 1px solid #333;
 }
 
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #00bfff;
-}
+.logo { font-size: 28px; font-weight: bold; color: #00bfff; }
 
 .nav-links a {
     color: #aaa;
     margin: 0 16px;
     text-decoration: none;
-    font-weight: 500;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-    color: #00bfff;
-}
+.nav-links a:hover, .nav-links a.active { color: #00bfff; }
 
-.status {
-    color: #00cc00;
-    font-size: 15px;
-}
+.status { color: #00cc00; font-size: 15px; }
 
-.container {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
+.container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
 
-.main-title {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 8px;
-}
+.main-title { text-align: center; font-size: 36px; margin-bottom: 8px; }
 
-.subtitle {
-    text-align: center;
-    color: #777;
-    margin-bottom: 30px;
-}
+.subtitle { text-align: center; color: #777; margin-bottom: 30px; }
 
-.search-box {
-    display: flex;
-    gap: 12px;
-    max-width: 700px;
-    margin: 0 auto 30px;
-}
+.search-box { display: flex; gap: 12px; max-width: 700px; margin: 0 auto 30px; }
 
 .url-input {
     flex: 1;
@@ -94,7 +62,6 @@ body {
     color: white;
     text-decoration: none;
     border-radius: 6px;
-    font-weight: bold;
     margin-top: 10px;
 }
 
@@ -113,7 +80,6 @@ body {
     overflow-y: auto;
     font-family: monospace;
     color: #00ffaa;
-    border-radius: 4px;
 }
 
 .credits {
@@ -123,16 +89,7 @@ body {
     min-height: 80px;
 }
 
-.page {
-    display: none;
-}
+.page { display: none; }
+#dashboard { display: block; }
 
-#dashboard {
-    display: block;
-}
-
-.ad-banner {
-    margin: 15px 0;
-    text-align: center;
-    min-height: 90px;
-}
+.ad-banner { margin: 15px 0; text-align: center; min-height: 90px; }
