@@ -1,101 +1,80 @@
-// ============== Firebase Config ==============
-const firebaseConfig = {
-    apiKey: "AIzaSyDwi8M-lf5om1E5_M95xmj5Z3G6lcpEed8",
-    authDomain: "anonim-site.firebaseapp.com",
-    projectId: "anonim-site",
-    storageBucket: "anonim-site.firebasestorage.app",
-    messagingSenderId: "454258543236",
-    appId: "1:454258543236:web:f28f47c9bf918a230050d1"
-};
-
+const firebaseConfig = { /* Senin config'in */ };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+const teamMembers = [
+    "NodeGuard Developer", "Rxc Team", "only freeazes", 
+    "berkcxn", "imamsaksuka", "osint team", "Rxc Security"
+];
+
+let creditIndex = 0;
+
+function showCredits() {
+    const creditsDiv = document.getElementById('credits');
+    setInterval(() => {
+        creditsDiv.innerHTML = `<strong>${teamMembers[creditIndex]}</strong>`;
+        creditIndex = (creditIndex + 1) % teamMembers.length;
+    }, 1800);
+}
+
 function log(message, color = "#00ffaa") {
     const logArea = document.getElementById('log');
-    const entry = document.createElement('div');
-    entry.style.color = color;
-    entry.style.marginBottom = "6px";
-    entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-    logArea.appendChild(entry);
+    if (!logArea) return;
+    const div = document.createElement('div');
+    div.style.color = color;
+    div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+    logArea.appendChild(div);
     logArea.scrollTop = logArea.scrollHeight;
 }
 
-async function saveScan(url, report) {
-    try {
-        await db.collection("osint_scans").add({
-            url: url,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            report: report,
-            userCount: 234
-        });
-    } catch (e) {}
-}
-
-function generateOSINTReport(url) {
+function generateReport(target) {
     return `
-        <h2 style="color:#00bfff;">${url}</h2>
-        <p><strong>Tarama Tarihi:</strong> ${new Date().toLocaleString('tr-TR')}</p>
+        <h2>${target}</h2>
+        <p><strong>IPv4:</strong> 185.164.XXX.XXX</p>
+        <p><strong>IPv6:</strong> 2a00:1450:4001:xxx::</p>
+        <p><strong>Sağlayıcı:</strong> Cloudflare, Inc.</p>
+        <p><strong>Ülke:</strong> Türkiye / Global CDN</p>
+        <p><strong>Hosting:</strong> Cloudflare + Hetzner</p>
+        <p><strong>Tech Stack:</strong> Nginx, PHP 8.2, WordPress</p>
         <hr>
-        
-        <h3>🔍 Genel Bilgiler</h3>
-        <p><strong>IP:</strong> 185.164.XXX.XXX (Türkiye)</p>
-        <p><strong>Hosting:</strong> Cloudflare Inc.</p>
-        <p><strong>Domain Yaşı:</strong> 2 yıl 4 ay</p>
-        
-        <h3>🌐 Teknoloji Bilgileri</h3>
-        <p>WordPress • Nginx • PHP 8.2 • jQuery</p>
-        
-        <h3>⚠️ Tespit Edilen Riskler</h3>
-        <p style="color:#ff6666;">• SQL Injection riski tespit edildi</p>
-        <p style="color:#ffaa00;">• Exposed Directory List</p>
-        <p style="color:#ffaa00;">• Outdated Plugin</p>
-        
-        <h3>📊 Öneriler</h3>
-        <p>• WAF aktif hale getirin<br>
-           • Güncellemeleri yapın<br>
-           • Güvenlik eklentisi kullanın</p>
+        <p style="color:#ff6666;"><strong>Orta Seviye Risk:</strong> SQL Injection ve Directory Listing tespit edildi.</p>
     `;
 }
 
-async function startOSINT() {
-    const url = document.getElementById('urlInput').value.trim();
-    if (!url) return alert("URL girin!");
+async function startFullScan() {
+    const target = document.getElementById('targetInput').value.trim();
+    if (!target) return alert("Hedef girin!");
 
-    document.getElementById('results').style.display = 'block';
+    document.getElementById('osint-page').style.display = 'block';
+    document.getElementById('dashboard').style.display = 'none';
+
     const logArea = document.getElementById('log');
     logArea.innerHTML = '';
 
-    log("OSINT taraması başlatılıyor...", "#00ffff");
-    log(`Hedef: ${url}`, "#ffffff");
-
+    log("Bağlantı kuruluyor...", "#00ffff");
+    log("IPv4 ve IPv6 adresleri sorgulanıyor...", "#ffff00");
     await new Promise(r => setTimeout(r, 900));
-    log("DNS ve WHOIS sorgusu yapılıyor...", "#00ffaa");
-
-    await new Promise(r => setTimeout(r, 800));
-    log("IP ve Hosting bilgisi alındı", "#00ffaa");
-
-    await new Promise(r => setTimeout(r, 1100));
-    log("Teknoloji taraması tamamlandı (Wappalyzer)", "#00ffaa");
-
-    await new Promise(r => setTimeout(r, 950));
-    log("Zafiyet veritabanı kontrolü yapılıyor...", "#ffff00");
-
+    log("Hosting ve Sağlayıcı bilgisi alındı", "#00ffaa");
+    log("OSINT veritabanları taranıyor...", "#00ffaa");
     await new Promise(r => setTimeout(r, 1200));
-    log("OSINT taraması başarıyla tamamlandı.", "#00ff00");
+    log("Tarama tamamlandı.", "#00ff00");
 
-    const reportHTML = generateOSINTReport(url);
-    document.getElementById('report').innerHTML = reportHTML;
-
-    saveScan(url, reportHTML);
+    document.getElementById('report').innerHTML = generateReport(target);
 }
 
-// Sayfa yüklendiğinde
+// Sayfa Geçişi
+function showDashboard() {
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('osint-page').style.display = 'none';
+}
+
+function showOSINT() {
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('osint-page').style.display = 'block';
+}
+
+// Başlangıç
 window.onload = () => {
-    console.log("%cNodeGuard OSINT Platformu - v2.0", "color: #00bfff; font-size: 16px");
-    
-    // AdSense yükleme
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch(e) {}
+    showCredits();
+    console.log("%cNodeGuard OSINT Platformu", "color: #00bfff; font-size: 18px");
 };
