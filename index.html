@@ -4,68 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NodeGuard - OSINT & Güvenlik Platformu</title>
-    
-    <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3581301294764999" crossorigin="anonymous"></script>
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Top Banner Ad -->
     <div class="ad-banner">
-        <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
-             data-ad-client="ca-pub-3581301294764999"
-             data-ad-slot="YOUR_AD_SLOT_1"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3581301294764999" data-ad-slot="YOUR_AD_SLOT_1" data-full-width-responsive="true"></ins>
     </div>
 
     <nav class="navbar">
         <div class="logo">NodeGuard</div>
         <div class="nav-links">
-            <a href="#">Dashboard</a>
-            <a href="#" class="active">OSINT Tarama</a>
+            <a href="#" onclick="showDashboard()">Dashboard</a>
+            <a href="#" onclick="showOSINT()" class="active">OSINT Tarama</a>
             <a href="#">Raporlar</a>
             <a href="#">IP Logger</a>
-            <a href="#">Ekip (6741)</a>
         </div>
-        <div class="status">14 Ülke • Aktif</div>
+        <div class="status">VPN Aktif • 234 Kullanıcı</div>
     </nav>
 
-    <div class="container">
-        <h1 class="main-title">OSINT & Site Analiz Sistemi</h1>
-        <p class="subtitle">Hedef site hakkında detaylı istihbarat ve güvenlik analizi</p>
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="page">
+        <div class="container">
+            <h1 class="main-title">NodeGuard</h1>
+            <p class="subtitle">Profesyonel OSINT ve Siber Güvenlik İstihbarat Platformu</p>
 
-        <div class="search-box">
-            <input type="text" id="urlInput" class="url-input" placeholder="https://example.com" value="https://example.com">
-            <button onclick="startOSINT()" class="btn-primary">OSINT TARAMASI BAŞLAT</button>
-        </div>
-
-        <!-- Second Ad -->
-        <div class="ad-banner" style="margin: 25px 0;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-3581301294764999"
-                 data-ad-slot="YOUR_AD_SLOT_2"
-                 data-ad-format="rectangle"
-                 data-full-width-responsive="true"></ins>
-        </div>
-
-        <div id="results" class="results">
             <div class="card">
-                <h3>Tarama Logu</h3>
-                <div id="log" class="log-area"></div>
+                <h2>Hakkımızda</h2>
+                <p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir OSINT ve güvenlik analiz aracıdır. Kendi VPN altyapımız üzerinden 14 farklı ülkede hizmet vermekteyiz.</p>
             </div>
 
             <div class="card">
-                <h3>OSINT Raporu</h3>
-                <div id="report" class="report-area"></div>
+                <h2>İsmi Geçenler</h2>
+                <div id="credits" class="credits"></div>
+            </div>
+
+            <div class="card">
+                <h2>Tru Mail - Geçici Mail Uygulaması</h2>
+                <p>Ekibimizin geliştirdiği geçici e-posta uygulaması:</p>
+                <a href="https://www.mediafire.com/file/yvu14y5enibz2zr/Tru_Mail_.apk/file" target="_blank" class="btn-download">
+                    ↓ Tru Mail APK İndir
+                </a>
+            </div>
+
+            <div class="card">
+                <h2>Lisans & Telif Hakkı</h2>
+                <p>© 2026 NodeGuard Developer - Tüm Hakları Saklıdır.<br>
+                Bu araç yalnızca yetkili ekip üyeleri tarafından kullanılabilir.</p>
+                <p>Yapımcı: <strong>NodeGuard Developer</strong> (Rxc Team)</p>
             </div>
         </div>
     </div>
 
-    <!-- Firebase -->
+    <!-- OSINT PAGE -->
+    <div id="osint-page" class="page" style="display: none;">
+        <div class="container">
+            <h1 class="main-title">OSINT & IP Sorgu Sistemi</h1>
+
+            <div class="search-box">
+                <input type="text" id="targetInput" class="url-input" placeholder="https://example.com veya IP adresi">
+                <button onclick="startFullScan()" class="btn-primary">Tara</button>
+            </div>
+
+            <div id="results" class="results">
+                <div class="card">
+                    <h3>Tarama Logu</h3>
+                    <div id="log" class="log-area"></div>
+                </div>
+                <div class="card">
+                    <h3>Detaylı Rapor</h3>
+                    <div id="report" class="report-area"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
