@@ -1,16 +1,26 @@
-// script.js
+// ================== FIREBASE CONFIG ==================
+const firebaseConfig = {
+    apiKey: "AIzaSyDwi8M-lf5om1E5_M95xmj5Z3G6lcpEed8",
+    authDomain: "anonim-site.firebaseapp.com",
+    projectId: "anonim-site",
+    storageBucket: "anonim-site.firebasestorage.app",
+    messagingSenderId: "454258543236",
+    appId: "1:454258543236:web:f28f47c9bf918a230050d1"
+};
 
-const teamMembers = [
-    "NodeGuard Developer", "Rxc Team", "only freeazes", 
-    "berkcxn", "imamsaksuka", "osint team", "Rxc Security"
-];
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
+console.log("%cFirebase başarıyla bağlandı", "color: lime");
+
+// ================== ANA KOD ==================
+const teamMembers = ["NodeGuard Developer", "Rxc Team", "only freeazes", "berkcxn", "imamsaksuka", "osint team", "Rxc Security"];
 let creditIndex = 0;
 
 function showCredits() {
     const creditsDiv = document.getElementById('credits');
     if (!creditsDiv) return;
-    
     setInterval(() => {
         creditsDiv.innerHTML = `<strong>${teamMembers[creditIndex]}</strong>`;
         creditIndex = (creditIndex + 1) % teamMembers.length;
@@ -20,45 +30,28 @@ function showCredits() {
 function log(message, color = "#00ffaa") {
     const logArea = document.getElementById('log');
     if (!logArea) return;
-    
     const div = document.createElement('div');
     div.style.color = color;
-    div.style.margin = "4px 0";
     div.textContent = `[${new Date().toLocaleTimeString('tr-TR')}] ${message}`;
     logArea.appendChild(div);
     logArea.scrollTop = logArea.scrollHeight;
 }
 
 function generateReport(target) {
-    return `
-        <h2>${target}</h2>
-        <p><strong>IPv4:</strong> 185.164.XXX.XXX</p>
-        <p><strong>IPv6:</strong> 2a00:1450:4001:831::200e</p>
-        <p><strong>Sağlayıcı:</strong> Cloudflare, Inc.</p>
-        <p><strong>Ülke:</strong> Türkiye (Global CDN)</p>
-        <p><strong>Hosting:</strong> Cloudflare + Hetzner</p>
-        <p><strong>Teknoloji:</strong> Nginx • PHP 8.2 • WordPress</p>
-        <hr>
-        <p style="color:#ff6666;"><strong>Risk:</strong> Orta seviye - SQL Injection ve Açık Dizin tespit edildi.</p>
-    `;
+    return `<h2>${target}</h2><p><strong>IPv4:</strong> 185.164.XXX.XXX</p><p><strong>IPv6:</strong> 2a00:1450:4001:831::200e</p><p><strong>Sağlayıcı:</strong> Cloudflare, Inc.</p><p><strong>Risk:</strong> Orta seviye</p>`;
 }
 
 async function startFullScan() {
     const target = document.getElementById('targetInput').value.trim();
-    if (!target) {
-        alert("Lütfen bir URL veya IP adresi girin!");
-        return;
-    }
+    if (!target) return alert("Hedef girin!");
 
     document.getElementById('results').style.display = 'block';
     const logArea = document.getElementById('log');
     logArea.innerHTML = '';
 
-    log("OSINT Motoru başlatılıyor...", "#00ffff");
-    log("IPv4 ve IPv6 sorgusu yapılıyor...", "#ffff00");
+    log("OSINT başlatılıyor...", "#00ffff");
     await new Promise(r => setTimeout(r, 800));
-    log("Hosting ve Sağlayıcı bilgisi alındı", "#00ffaa");
-    await new Promise(r => setTimeout(r, 1100));
+    log("IPv4/IPv6 sorgusu tamamlandı", "#00ffaa");
     log("Tarama tamamlandı.", "#00ff00");
 
     document.getElementById('report').innerHTML = generateReport(target);
@@ -74,8 +67,7 @@ function showOSINT() {
     document.getElementById('osint-page').style.display = 'block';
 }
 
-// Sayfa yüklendiğinde
 window.onload = () => {
     showCredits();
-    console.log("%cNodeGuard OSINT Platformu v2.1 - Firebase Bağlantılı", "color: #00bfff; font-size: 16px");
+    console.log("%cNodeGuard v2.1 Çalışıyor", "color: #00bfff");
 };
