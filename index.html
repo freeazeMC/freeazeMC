@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>NodeGuard - OSINT & Güvenlik Platformu</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar">
@@ -20,8 +20,8 @@
         <div class="container">
             <div class="card">
                 <h1 class="main-title">NodeGuard</h1>
-                <p style="line-height: 1.6; margin-bottom: 10px;">NodeGuard, internet üzerindeki açık kaynaklı verileri (OSINT) analiz etmek, IP adreslerini izlemek ve siber tehditleri erkenden tespit etmek için Rxc Team tarafından geliştirilmiş profesyonel bir istihbarat platformudur. Platform, şüpheli ağ aktivitelerini takip etme, dijital ayak izi tarama ve gelişmiş güvenlik raporlama süreçlerini tek bir merkezde toplar.</p>
-                <a href="https://www.mediafire.com/file/yvu14y5enibz2zr/Tru_Mail_.apk/file" target="_blank" class="btn-download">Tru Mail İndir</a>
+                <p>NodeGuard, internet üzerindeki açık kaynaklı verileri (OSINT) analiz etmek, IP adreslerini izlemek ve siber tehditleri erkenden tespit etmek için Rxc Team tarafından geliştirilmiş profesyonel bir istihbarat platformudur. Platform, şüpheli ağ aktivitelerini takip etme, dijital ayak izi tarama ve gelişmiş güvenlik raporlama süreçlerini tek bir merkezde toplar.</p>
+                <a href="https://www.mediafire.com/file/yvu14y5enibz2zr/Tru_Mail_.apk/file" target="_blank" class="btn-download">▼ Tru Mail İndir</a>
             </div>
             
             <div class="card">
@@ -35,17 +35,9 @@
         </div>
     </div>
 
-    <!-- Diğer sayfalar aynı şekilde kalabilir -->
     <div id="osint-page" class="page"><div class="container"><div class="card"><h1>OSINT Paneli</h1></div></div></div>
-    <div id="ip-page" class="page"><div class="container"><div class="card"><h1>IP Sorgu</h1></div></div></div>
+    <div id="ip-page" class="page"><div class="container"><div class="card"><h1>IP Sorgu</h1><div id="ip-report"></div></div></div></div>
 
-    <script>
-        function showPage(id, el) {
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            document.getElementById(id).style.display = 'block';
-            el.classList.add('active');
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
