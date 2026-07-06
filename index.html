@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NodeGuard - OSINT & Güvenlik Platformu</title>
+    
+    <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3581301294764999" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Reklam -->
     <div class="ad-banner">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3581301294764999" data-ad-slot="YOUR_AD_SLOT_1" data-full-width-responsive="true"></ins>
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-client="ca-pub-3581301294764999"
+             data-ad-slot="YOUR_AD_SLOT_1"
+             data-full-width-responsive="true"></ins>
     </div>
 
     <nav class="navbar">
@@ -31,7 +38,7 @@
 
             <div class="card">
                 <h2>Hakkımızda</h2>
-                <p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir OSINT ve güvenlik analiz aracıdır. Kendi VPN altyapımız üzerinden 14 farklı ülkede hizmet vermekteyiz.</p>
+                <p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir OSINT ve güvenlik analiz aracıdır. Kendi VPN altyapımız üzerinden 14 ülkede hizmet vermekteyiz.</p>
             </div>
 
             <div class="card">
@@ -56,13 +63,13 @@
         </div>
     </div>
 
-    <!-- OSINT PAGE -->
+    <!-- OSINT SAYFASI -->
     <div id="osint-page" class="page" style="display: none;">
         <div class="container">
             <h1 class="main-title">OSINT & IP Sorgu Sistemi</h1>
 
             <div class="search-box">
-                <input type="text" id="targetInput" class="url-input" placeholder="https://example.com veya IP adresi">
+                <input type="text" id="targetInput" class="url-input" placeholder="https://example.com veya IP adresi girin">
                 <button onclick="startFullScan()" class="btn-primary">Tara</button>
             </div>
 
@@ -79,8 +86,10 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="firebase.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
