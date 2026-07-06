@@ -17,14 +17,60 @@
         </div>
     </nav>
 
-    <div id="dashboard" class="page"><div class="container"><h1 class="main-title">NodeGuard</h1><p class="subtitle">Profesyonel OSINT ve Siber Güvenlik İstihbarat Platformu</p><div class="card"><h2>Hakkımızda</h2><p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir güvenlik ve istihbarat aracıdır.</p></div></div></div>
+    <div id="dashboard" class="page">
+        <div class="container">
+            <h1 class="main-title">NodeGuard</h1>
+            <p class="subtitle">Profesyonel OSINT ve Siber Güvenlik İstihbarat Platformu</p>
+            <div class="card">
+                <h2>Hakkımızda</h2>
+                <p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir güvenlik aracıdır.</p>
+                <div class="scrolling-credits"><div class="text">Rxc Team<br>NodeGuard Developer<br>Berkcxn<br>onlinnefreeaze</div></div>
+            </div>
+        </div>
+    </div>
 
-    <div id="osint-page" class="page" style="display: none;"><div class="container"><h1 class="main-title">OSINT Tarama</h1><div class="search-box"><input type="text" id="targetInput" class="url-input" placeholder="Hedef Domain veya IP"><button onclick="startFullScan()" class="btn-primary">OSINT Tara</button></div><div id="results" class="results"><div class="card"><h3>Tarama Logu</h3><div id="log" class="log-area"></div></div><div class="card"><h3>Rapor</h3><div id="report" class="report-area"></div></div></div></div></div>
+    <div id="osint-page" class="page" style="display: none;">
+        <div class="container">
+            <h1 class="main-title">OSINT Tarama</h1>
+            <div class="search-box">
+                <input type="text" id="targetInput" class="url-input" placeholder="IP veya Domain">
+                <button onclick="startFullScan()" class="btn-primary">OSINT Tara</button>
+            </div>
+            <div id="results" class="results">
+                <div class="card"><h3>Tarama Logu</h3><div id="log" class="log-area"></div></div>
+                <div class="card"><h3>Rapor</h3><div id="report" class="report-area"></div></div>
+            </div>
+        </div>
+    </div>
 
-    <div id="ip-page" class="page" style="display: none;"><div class="container"><h1 class="main-title">IP Sorgu</h1><div class="search-box"><input type="text" id="ipInput" class="url-input" placeholder="IP Adresi"><button onclick="startIPQuery()" class="btn-primary">IP Sorgula</button></div><div id="ip-results" class="results"><div class="card"><div id="ip-report" class="report-area"></div></div></div></div></div>
+    <div id="ip-page" class="page" style="display: none;">
+        <div class="container">
+            <h1 class="main-title">IP Sorgu</h1>
+            <div class="search-box">
+                <input type="text" id="ipInput" class="url-input" placeholder="IP Adresi">
+                <button onclick="startIPQuery()" class="btn-primary">IP Sorgula</button>
+            </div>
+            <div class="card"><div id="ip-report" class="report-area">Veri bekleniyor...</div></div>
+        </div>
+    </div>
 
-    <div id="license-page" class="page" style="display: none;"><div class="container"><h1 class="main-title">Lisans & Telif Hakkı</h1><div class="card"><h2>İsmi Geçenler</h2><div id="credits" class="credits"><div class="credits-inner">Rxc Team<br>NodeGuard Developer<br>Berkcxn<br>onlinnefreeaze</div></div></div></div></div>
-
+    <div id="license-page" class="page" style="display: none;">
+        <div class="container">
+            <h1 class="main-title">Lisans & Telif Hakkı</h1>
+            <div class="card">
+                <p>1. NodeGuard, Rxc Team tarafından tescilli bir siber istihbarat projesidir.</p>
+                <p>2. İçerisinde yer alan tüm algoritmalar ve tasarım öğeleri özgün çalışmadır.</p>
+                <p>3. İzinsiz kopyalanması, modifiye edilmesi veya ticari amaçla satılması yasaktır.</p>
+                <p>4. Projenin kaynak kodlarına erişim yetkisi sadece proje geliştiricilerine aittir.</p>
+                <p>5. NodeGuard ismi ve logosu fikri mülkiyet hakları kapsamında korunmaktadır.</p>
+                <p>6. Kullanıcılar, platformu yalnızca etik ve yasal sınırlar içerisinde kullanmalıdır.</p>
+                <p>7. Platform üzerinden elde edilen verilerin sorumluluğu tamamen kullanıcıya aittir.</p>
+                <p>8. Rxc Team, izinsiz kullanımlarda yasal yollara başvurma hakkını saklı tutar.</p>
+                <p>9. Bu lisans metni, yazılımın bulunduğu her sunucuda geçerliliğini korur.</p>
+                <p>10. NodeGuard kullanımı, işbu sözleşme şartlarının kabul edildiği anlamına gelir.</p>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
