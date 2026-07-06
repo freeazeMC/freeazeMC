@@ -2,20 +2,8 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NodeGuard - OSINT Platform</title>
-    <style>
-        body { background-color: #0a0a0a !important; color: #e0e0e0 !important; font-family: sans-serif; margin: 0; }
-        .navbar { background: #121212; padding: 20px; display: flex; gap: 20px; border-bottom: 2px solid #333; }
-        .navbar a { color: #00bfff !important; text-decoration: none; font-weight: bold; cursor: pointer; }
-        .container { max-width: 900px; margin: 40px auto; padding: 20px; }
-        .card { background: #161616; border: 1px solid #444; padding: 25px; margin-bottom: 20px; border-radius: 8px; }
-        .page { display: none; }
-        #dashboard { display: block; }
-        .scrolling-credits { height: 60px; overflow: hidden; background: #000; text-align: center; color: #00bfff; margin-top: 10px; border-radius: 5px; }
-        .text { animation: scroll 6s linear infinite; }
-        @keyframes scroll { 0% { transform: translateY(100%); } 100% { transform: translateY(-100%); } }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <title>NodeGuard - OSINT & Güvenlik Platformu</title>
 </head>
 <body>
     <nav class="navbar">
@@ -28,25 +16,12 @@
         </div>
     </nav>
 
-    <div id="dashboard" class="page"><div class="container"><div class="card"><h1>Hakkımızda</h1><p>NodeGuard, Rxc Team tarafından geliştirilen güvenlik aracıdır.</p><div class="scrolling-credits"><div class="text">Rxc Team<br>NodeGuard Developer<br>Berkcxn<br>onlinnefreeaze</div></div></div></div></div>
+    <div id="dashboard" class="page"><div class="container"><h1 style="color:white">NodeGuard</h1><p>Profesyonel OSINT Platformu</p><div class="card"><h2>Hakkımızda</h2><p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir güvenlik aracıdır.</p></div></div></div>
+    
+    <div id="osint-page" class="page"><div class="container"><div class="card"><h1>OSINT</h1><input type="text" id="targetInput"><button onclick="startFullScan()">Tara</button></div></div></div>
+    
+    <div id="ip-page" class="page"><div class="container"><div class="card"><h1>IP Sorgu</h1><input type="text" id="ipInput"><button onclick="startIPQuery()">Sorgula</button></div></div></div>
 
-    <div id="osint-page" class="page"><div class="container"><div class="card"><h1>OSINT</h1><input type="text" id="targetInput" placeholder="Hedef"><button onclick="startFullScan()">Tara</button><div id="log"></div><div id="report"></div></div></div></div>
-
-    <div id="ip-page" class="page"><div class="container"><div class="card"><h1>IP Sorgu</h1><input type="text" id="ipInput" placeholder="IP"><button onclick="startIPQuery()">Sorgula</button><div id="ip-report"></div></div></div></div>
-
-    <div id="license-page" class="page"><div class="container"><div class="card"><h1>Lisans</h1><p>1. NodeGuard, Rxc Team projesidir.<br>2. İzinsiz çoğaltılamaz.<br>3. Tüm hakları saklıdır.</p></div></div></div>
-
-    <script>
-        function showPage(id, el) {
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
-        }
-        async function startIPQuery() {
-            const target = document.getElementById('ipInput').value;
-            const res = await fetch(`https://ip-api.com/json/${target}`);
-            const data = await res.json();
-            document.getElementById('ip-report').innerHTML = `IP: ${data.query} <br> Ülke: ${data.country}`;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
