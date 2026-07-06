@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NodeGuard - OSINT & Güvenlik Platformu</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3581301294764999" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="ad-banner"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3581301294764999" data-ad-slot="YOUR_AD_SLOT_1" data-full-width-responsive="true"></ins></div>
     <nav class="navbar">
         <div class="logo"><span>&gt;_</span> NodeGuard</div>
         <div class="nav-links">
-            <a href="#" onclick="showPage('dashboard')">Dashboard</a>
-            <a href="#" onclick="showPage('osint-page')">OSINT 2026</a>
-            <a href="#" onclick="showPage('ip-page')">IP Sorgu 2022</a>
-            <a href="#" onclick="showPage('license-page')">Lisans & Telif</a>
+            <a href="#" onclick="showPage('dashboard', this)">Dashboard</a>
+            <a href="#" onclick="showPage('osint-page', this)">OSINT 2026</a>
+            <a href="#" onclick="showPage('ip-page', this)">IP Sorgu</a>
+            <a href="#" onclick="showPage('license-page', this)">Lisans & Telif</a>
         </div>
     </nav>
+
     <div id="dashboard" class="page"><div class="container"><h1 class="main-title">NodeGuard</h1><p class="subtitle">Profesyonel OSINT ve Siber Güvenlik İstihbarat Platformu</p><div class="card"><h2>Hakkımızda</h2><p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir güvenlik ve istihbarat aracıdır.</p></div></div></div>
-    <div id="osint-page" class="page" style="display: none;"><div class="container"><h1 class="main-title">OSINT Tarama</h1><div class="search-box"><input type="text" id="targetInput" class="url-input" placeholder="https://example.com"><button onclick="startFullScan()" class="btn-primary">OSINT Tara</button></div><div id="results" class="results"><div class="card"><h3>Tarama Logu</h3><div id="log" class="log-area"></div></div><div class="card"><h3>Rapor</h3><div id="report" class="report-area"></div></div></div></div></div>
-    <div id="ip-page" class="page" style="display: none;"><div class="container"><h1 class="main-title">IP Sorgu</h1><div class="search-box"><input type="text" id="ipInput" class="url-input" placeholder="IP adresi"><button onclick="startIPQuery()" class="btn-primary">IP Sorgula</button></div><div id="ip-results" class="results"><div class="card"><div id="ip-report" class="report-area"></div></div></div></div></div>
-    <div id="license-page" class="page" style="display: none;"><div class="container"><h1 class="main-title">Lisans & Telif Hakkı</h1><div class="card"><h2>İsmi Geçenler</h2><div id="credits" class="credits"><div class="credits-inner">Rxc Team<br>NodeGuard Developer<br>Berkcxn<br>onlinnefreeaze</div></div></div><div class="card"><h2>Telif Hakkı</h2><p>NodeGuard © 2026. Tüm hakları saklıdır.</p></div></div></div>
+
+    <div id="osint-page" class="page" style="display: none;"><div class="container"><h1 class="main-title">OSINT Tarama</h1><div class="search-box"><input type="text" id="targetInput" class="url-input" placeholder="Hedef Domain veya IP"><button onclick="startFullScan()" class="btn-primary">OSINT Tara</button></div><div id="results" class="results"><div class="card"><h3>Tarama Logu</h3><div id="log" class="log-area"></div></div><div class="card"><h3>Rapor</h3><div id="report" class="report-area"></div></div></div></div></div>
+
+    <div id="ip-page" class="page" style="display: none;"><div class="container"><h1 class="main-title">IP Sorgu</h1><div class="search-box"><input type="text" id="ipInput" class="url-input" placeholder="IP Adresi"><button onclick="startIPQuery()" class="btn-primary">IP Sorgula</button></div><div id="ip-results" class="results"><div class="card"><div id="ip-report" class="report-area"></div></div></div></div></div>
+
+    <div id="license-page" class="page" style="display: none;"><div class="container"><h1 class="main-title">Lisans & Telif Hakkı</h1><div class="card"><h2>İsmi Geçenler</h2><div id="credits" class="credits"><div class="credits-inner">Rxc Team<br>NodeGuard Developer<br>Berkcxn<br>onlinnefreeaze</div></div></div></div></div>
+
     <script src="script.js"></script>
 </body>
 </html>
