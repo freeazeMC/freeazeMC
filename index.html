@@ -10,20 +10,16 @@
 </head>
 <body>
     <div class="ad-banner">
-        <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
-             data-ad-client="ca-pub-3581301294764999"
-             data-ad-slot="YOUR_AD_SLOT_1"
-             data-full-width-responsive="true"></ins>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3581301294764999" data-ad-slot="YOUR_AD_SLOT_1" data-full-width-responsive="true"></ins>
     </div>
 
     <nav class="navbar">
-        <div class="logo">NodeGuard</div>
+        <div class="logo">
+            <span>&gt;_</span> NodeGuard
+        </div>
         <div class="nav-links">
             <a href="#" onclick="showDashboard()">Dashboard</a>
-            <a href="#" onclick="showOSINT()" class="active">OSINT Tarama</a>
-            <a href="#">Raporlar</a>
-            <a href="#">IP Logger</a>
+            <a href="#" onclick="showOSINT()" class="active">OSINT ve IP Çözümleri</a>
         </div>
         <div class="status">VPN Aktif • 234 Kullanıcı</div>
     </nav>
@@ -50,22 +46,17 @@
                     ↓ Tru Mail APK İndir
                 </a>
             </div>
-
-            <div class="card">
-                <h2>Lisans</h2>
-                <p>© 2026 NodeGuard Developer - Tüm Hakları Saklıdır.</p>
-            </div>
         </div>
     </div>
 
-    <!-- OSINT -->
+    <!-- OSINT SAYFASI -->
     <div id="osint-page" class="page" style="display: none;">
         <div class="container">
-            <h1 class="main-title">OSINT & IP Sorgu Sistemi</h1>
+            <h1 class="main-title">OSINT ve IP Çözümleri</h1>
 
             <div class="search-box">
-                <input type="text" id="targetInput" class="url-input" placeholder="https://example.com veya IP adresi">
-                <button onclick="startFullScan()" class="btn-primary">Tara</button>
+                <input type="text" id="targetInput" class="url-input" placeholder="https://example.com veya IP adresi girin">
+                <button onclick="startFullScan()" class="btn-primary">Sorgula</button>
             </div>
 
             <div id="results" class="results">
@@ -81,7 +72,6 @@
         </div>
     </div>
 
-    <!-- Firebase + Script -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
