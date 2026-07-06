@@ -1,95 +1,16 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    background: #0a0a0a;
-    color: #e0e0e0;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-.navbar {
-    background: #121212;
-    padding: 16px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #333;
-}
-
-.logo { font-size: 28px; font-weight: bold; color: #00bfff; }
-
-.nav-links a {
-    color: #aaa;
-    margin: 0 16px;
-    text-decoration: none;
-}
-
-.nav-links a:hover, .nav-links a.active { color: #00bfff; }
-
-.status { color: #00cc00; font-size: 15px; }
-
-.container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-
-.main-title { text-align: center; font-size: 36px; margin-bottom: 8px; }
-
-.subtitle { text-align: center; color: #777; margin-bottom: 30px; }
-
-.search-box { display: flex; gap: 12px; max-width: 700px; margin: 0 auto 30px; }
-
-.url-input {
-    flex: 1;
-    padding: 16px;
-    background: #1f1f1f;
-    border: 1px solid #444;
-    color: white;
-    font-size: 17px;
-    border-radius: 6px;
-}
-
-.btn-primary {
-    padding: 16px 35px;
-    background: #0066cc;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+.credits {
+    font-size: 19px;
+    line-height: 2.4;
+    color: #00ccff;
+    min-height: 90px;
     font-weight: bold;
 }
 
-.btn-download {
-    display: inline-block;
-    padding: 14px 30px;
-    background: #00aa00;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    margin-top: 10px;
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #00bfff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
-
-.card {
-    background: #161616;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 25px;
-}
-
-.log-area {
-    background: #000;
-    padding: 15px;
-    height: 300px;
-    overflow-y: auto;
-    font-family: monospace;
-    color: #00ffaa;
-}
-
-.credits {
-    font-size: 18px;
-    line-height: 2.2;
-    color: #00ccff;
-    min-height: 80px;
-}
-
-.page { display: none; }
-#dashboard { display: block; }
-
-.ad-banner { margin: 15px 0; text-align: center; min-height: 90px; }
