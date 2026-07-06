@@ -1,58 +1,131 @@
-/* CyberVault Tasarım Dosyası */
-body { 
-    background: #000; 
-    color: #fff; 
-    font-family: 'Courier New', Courier, monospace; 
-    margin: 0; 
-    padding: 20px;
-}
-nav { 
-    display: flex; 
-    flex-wrap: wrap; 
-    background: #0a0a0a; 
-    padding: 15px; 
-    border-bottom: 2px solid #0f0; 
-    justify-content: center;
-}
-nav a { 
-    color: #0f0; 
-    margin: 10px; 
-    text-decoration: none; 
-    font-weight: bold; 
-    font-size: 0.9em;
-}
-section { 
-    padding: 30px; 
-    border-bottom: 1px solid #222; 
-    max-width: 800px; 
-    margin: auto;
-}
-h2 { 
-    color: #0f0; 
-    border-left: 5px solid #0f0; 
-    padding-left: 15px; 
-}
-textarea { 
-    width: 100%; 
-    height: 120px; 
-    background: #050505; 
-    color: #0f0; 
-    border: 1px solid #333; 
-    padding: 15px; 
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-button { 
-    background: #0f0; 
-    color: #000; 
-    border: none; 
-    padding: 12px 25px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    margin-top: 10px;
+
+body {
+    background-color: #0f0f0f;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
 }
-.panel { 
-    border: 1px solid #333; 
-    padding: 20px; 
-    background: #050505; 
-    color: #aaa;
+
+.navbar {
+    background-color: #1a1a1a;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    margin: 0 18px;
+    font-weight: 500;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+    color: #00bfff;
+}
+
+.status {
+    color: #00cc00;
+    font-size: 15px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.main-title {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.subtitle {
+    text-align: center;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    gap: 12px;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+.url-input {
+    flex: 1;
+    padding: 16px 20px;
+    font-size: 18px;
+    background: #1f1f1f;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.btn-primary {
+    padding: 16px 40px;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: #0080ff;
+}
+
+.card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.card h3 {
+    color: #00bfff;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.log-area {
+    background: #000;
+    padding: 15px;
+    height: 320px;
+    overflow-y: auto;
+    font-family: monospace;
+    color: #00ffaa;
+    border-radius: 4px;
+}
+
+.report-area {
+    line-height: 1.7;
+    color: #ddd;
+}
+
+.ad-banner {
+    margin: 20px 0;
+    text-align: center;
+    min-height: 100px;
 }
