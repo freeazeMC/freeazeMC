@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NodeGuard - OSINT & Güvenlik Platformu</title>
     
-    <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3581301294764999" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Reklam -->
     <div class="ad-banner">
         <ins class="adsbygoogle"
              style="display:block; text-align:center;"
@@ -38,7 +36,7 @@
 
             <div class="card">
                 <h2>Hakkımızda</h2>
-                <p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir OSINT ve güvenlik analiz aracıdır. Kendi VPN altyapımız üzerinden 14 ülkede hizmet vermekteyiz.</p>
+                <p>NodeGuard, Rxc Team tarafından geliştirilen kurumsal düzeyde bir OSINT ve güvenlik analiz aracıdır.</p>
             </div>
 
             <div class="card">
@@ -47,29 +45,26 @@
             </div>
 
             <div class="card">
-                <h2>Tru Mail - Geçici Mail Uygulaması</h2>
-                <p>Ekibimizin geliştirdiği geçici e-posta uygulaması:</p>
+                <h2>Tru Mail</h2>
                 <a href="https://www.mediafire.com/file/yvu14y5enibz2zr/Tru_Mail_.apk/file" target="_blank" class="btn-download">
                     ↓ Tru Mail APK İndir
                 </a>
             </div>
 
             <div class="card">
-                <h2>Lisans & Telif Hakkı</h2>
-                <p>© 2026 NodeGuard Developer - Tüm Hakları Saklıdır.<br>
-                Bu araç yalnızca yetkili ekip üyeleri tarafından kullanılabilir.</p>
-                <p>Yapımcı: <strong>NodeGuard Developer</strong> (Rxc Team)</p>
+                <h2>Lisans</h2>
+                <p>© 2026 NodeGuard Developer - Tüm Hakları Saklıdır.</p>
             </div>
         </div>
     </div>
 
-    <!-- OSINT SAYFASI -->
+    <!-- OSINT -->
     <div id="osint-page" class="page" style="display: none;">
         <div class="container">
             <h1 class="main-title">OSINT & IP Sorgu Sistemi</h1>
 
             <div class="search-box">
-                <input type="text" id="targetInput" class="url-input" placeholder="https://example.com veya IP adresi girin">
+                <input type="text" id="targetInput" class="url-input" placeholder="https://example.com veya IP adresi">
                 <button onclick="startFullScan()" class="btn-primary">Tara</button>
             </div>
 
@@ -86,10 +81,9 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Firebase + Script -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="firebase.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
