@@ -1,8 +1,13 @@
-.credits { height: 100px; overflow: hidden; position: relative; }
-.credits-inner { position: absolute; width: 100%; animation: scrollUp 10s linear infinite; }
-@keyframes scrollUp { 
-    0% { transform: translateY(100%); } 
-    100% { transform: translateY(-100%); } 
-}
+/* Sayfa Yönetimi */
 .page { display: none; }
 #dashboard { display: block; }
+.nav-links a.active { color: #00bfff !important; border-bottom: 2px solid #00bfff; }
+
+/* Kayan Yazı Animasyonu */
+.credits { height: 100px; overflow: hidden; position: relative; border-top: 1px solid #333; }
+.credits-inner { position: absolute; width: 100%; animation: scrollUp 8s linear infinite; text-align: center; }
+@keyframes scrollUp { 0% { transform: translateY(100%); } 100% { transform: translateY(-100%); } }
+
+/* Kartlar ve Genel */
+.card { background: #161616; border: 1px solid #333; border-radius: 8px; padding: 25px; margin: 20px 0; }
+.log-area { background: #000; padding: 15px; color: #00ffaa; font-family: monospace; }
