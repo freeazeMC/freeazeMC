@@ -1,32 +1,39 @@
-import { db } from "./firebase.js";
-import { collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+// Firebase SDK importları
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-const feed = document.getElementById('feed');
-const mesajInput = document.getElementById('mesajInput');
-const gonderBtn = document.getElementById('gonderBtn');
+// Senin Firebase Konfigürasyonun
+const firebaseConfig = {
+  apiKey: "AIzaSyDwi8M-lf5om1E5_M95xmj5Z3G6lcpEed8",
+  authDomain: "anonim-site.firebaseapp.com",
+  projectId: "anonim-site",
+  storageBucket: "anonim-site.firebasestorage.app",
+  messagingSenderId: "454258543236",
+  appId: "1:454258543236:web:f28f47c9bf918a230050d1"
+};
 
-// Verileri çek
-const q = query(collection(db, "paylasimlar"), orderBy("tarih", "desc"));
-onSnapshot(q, (snapshot) => {
-    feed.innerHTML = "";
-    snapshot.forEach((doc) => {
-        const data = doc.data();
-        feed.innerHTML += `
-            <div class="post">
-                <p>${data.icerik}</p>
-                <small>${new Date(data.tarih).toLocaleString()}</small>
-            </div>
-        `;
-    });
-});
+// Başlatma
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-// Veri gönder
-gonderBtn.addEventListener('click', async () => {
-    if (mesajInput.value.trim() !== "") {
-        await addDoc(collection(db, "paylasimlar"), {
-            icerik: mesajInput.value,
-            tarih: Date.now()
-        });
-        mesajInput.value = "";
+// Veri Gönderme Fonksiyonu
+window.submitData = async (colName, inputId) => {
+    const text = document.getElementById(inputId).value;
+    if (text.trim() === "") {
+        alert("Lütfen bir veri girin!");
+        return;
     }
-});
+    try {
+        await addDoc(collection(db, colName), { 
+            data: text, 
+            timestamp: new Date() 
+        });
+        alert("Başarılı: Veri CyberVault'a kaydedildi.");
+        document.getElementById(inputId).value = ""; // Temizle
+    } catch (e) {
+        console.error("Hata:", e);
+        alert("Bir hata oluştu.");
+    }
+};
+
+console.log("CyberVault Engine: Ready.");
