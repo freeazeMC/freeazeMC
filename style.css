@@ -1,21 +1,142 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #0a0a0a; color: #e0e0e0; font-family: sans-serif; }
-.navbar { background: #121212; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
-.logo { font-size: 26px; font-weight: bold; color: #00bfff; }
-.nav-links a { color: #aaa; margin: 0 16px; text-decoration: none; font-weight: bold; cursor: pointer; }
-.nav-links a.active { color: #00bfff; border-bottom: 2px solid #00bfff; }
-.container { max-width: 900px; margin: 40px auto; padding: 20px; }
-.card { background: #161616; border: 1px solid #333; padding: 30px; border-radius: 12px; margin-bottom: 20px; text-align: center; }
-.main-title { font-size: 32px; color: #fff; margin-bottom: 15px; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* Yeşil İndirme Butonu */
-.btn-download { display: inline-block; padding: 15px 30px; background: #28a745; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; transition: 0.3s; border: 1px solid #1e7e34; }
-.btn-download:hover { background: #218838; }
+body {
+    background: #0a0a0a;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
 
-/* Kayan Yazı */
-.scrolling-container { height: 160px; overflow: hidden; position: relative; background: #111; border-radius: 8px; margin-top: 20px; border: 1px solid #222; }
-.scrolling-text { position: absolute; width: 100%; animation: scrollUp 10s linear infinite; color: #00bfff; font-weight: bold; line-height: 2.5; }
-@keyframes scrollUp { 0% { transform: translateY(100%); } 100% { transform: translateY(-100%); } }
+.navbar {
+    background: #121212;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
 
-.page { display: none; }
-#dashboard { display: block; }
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #00bfff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-links a {
+    color: #aaa;
+    margin: 0 16px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #00bfff;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    gap: 12px;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+.url-input {
+    flex: 1;
+    padding: 16px;
+    background: #1f1f1f;
+    border: 1px solid #444;
+    color: white;
+    font-size: 17px;
+    border-radius: 6px;
+}
+
+.btn-primary {
+    padding: 16px 35px;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-download {
+    display: inline-block;
+    padding: 14px 30px;
+    background: #00aa00;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.card {
+    background: #161616;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.log-area {
+    background: #000;
+    padding: 15px;
+    height: 300px;
+    overflow-y: auto;
+    font-family: monospace;
+    color: #00ffaa;
+    border-radius: 4px;
+}
+
+.report-area {
+    line-height: 1.7;
+    color: #ddd;
+}
+
+.credits {
+    font-size: 19px;
+    line-height: 2.4;
+    color: #00ccff;
+    min-height: 110px;
+    font-weight: bold;
+}
+
+.page {
+    display: none;
+}
+
+#dashboard {
+    display: block;
+}
+
+.ad-banner {
+    margin: 15px 0;
+    text-align: center;
+    min-height: 90px;
+}
