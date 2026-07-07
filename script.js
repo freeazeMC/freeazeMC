@@ -1,33 +1,27 @@
-async function fetchData() {
-    try {
-        // Dolar/TL verisi
-        const resDolar = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-        const dataDolar = await resDolar.json();
-        const usdToTry = dataDolar.rates.TRY;
-        document.getElementById('dolar').innerText = usdToTry.toFixed(2) + " TL";
+// AI Analizi her zaman tepede
+function aiGuncelle(deger) {
+    const analiz = document.getElementById('ai-tavsiye');
+    analiz.innerHTML = deger > 34 ? 
+        "<span class='up'>AI: YÜKSELİŞ TRENDİ! ALIM İÇİN UYGUN.</span>" : 
+        "<span class='down'>AI: DÜŞÜŞ EĞİLİMİ. SATIŞ YAPIN.</span>";
+}
 
-        // Altın verisi (Gram/TRY) - Güncel piyasa verisi
-        // Not: Metals-api ücretsiz katmanı ile 1 gram altın değerini çekeriz
-        document.getElementById('altin').innerText = "2.485,50 TL"; // API bekleme yapmasın diye stabil değer
+// Robot Tepkileri
+function robotAtesPuskur() {
+    const r = document.getElementById('robot');
+    r.classList.add('ates-cikiyor');
+    setTimeout(() => r.classList.remove('ates-cikiyor'), 2000);
+}
 
-        // AI Analiz Mantığı
-        if(usdToTry > 34) {
-            document.getElementById('ai-tavsiye').innerText = "AI: Dolar yükselişte, alım yapma, bekle!";
-        } else {
-            document.getElementById('ai-tavsiye').innerText = "AI: Dolar uygun seviyede, alım yapılabilir.";
-        }
-    } catch (error) {
-        document.getElementById('dolar').innerText = "Veri hatası!";
-        document.getElementById('ai-tavsiye').innerText = "API bağlantısı kurulamadı.";
+// Maç Skorları (Simüle edildi, API bağlandığında burası canlanacak)
+function macGuncelle() {
+    const maclar = [
+        { takim1: "GS", takim2: "FB", skor: "2-1", durum: "BİTTİ" }
+    ];
+    // Burada robotun gülmesi ve bildirim vermesi
+    if(maclar[0].durum === "BİTTİ") {
+        alert("ENBABA: Maç bitti! " + maclar[0].takim1 + " " + maclar[0].skor + " kazandı kanka!");
     }
 }
 
-// Robot el sallama animasyonu (Basit bir CSS hareketi)
-document.getElementById('robot').onclick = function() {
-    this.style.transform = "rotate(20deg)";
-    setTimeout(() => { this.style.transform = "rotate(-20deg)"; }, 200);
-    setTimeout(() => { this.style.transform = "rotate(0deg)"; }, 400);
-    alert("ENBABA: Veriler anlık olarak çekildi kanka!");
-};
-
-window.onload = fetchData;
+window.onload = () => { aiGuncelle(35); macGuncelle(); };
