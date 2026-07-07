@@ -1,40 +1,12 @@
-body {
-    background-color: #ffffff;
-    color: #000000;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+body { background: #fff; color: #000; font-family: sans-serif; margin: 0; }
+.navbar { padding: 20px; text-align: center; font-size: 30px; font-weight: bold; border-bottom: 2px solid #000; }
+.dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 20px; }
+.card { border: 1px solid #000; padding: 15px; border-radius: 5px; }
 
-.navbar {
-    background-color: #f8f9fa;
-    padding: 25px;
-    text-align: center;
-    font-size: 32px;
-    font-weight: bold;
-    border-bottom: 2px solid #000000;
-}
+/* Düz çizgiler (Grafik) */
+.up { color: green; font-weight: bold; }
+.down { color: red; font-weight: bold; }
 
-.dashboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    padding: 50px;
-}
-
-.card {
-    border: 2px solid #000000;
-    width: 300px;
-    padding: 25px;
-    border-radius: 10px;
-    background: #ffffff;
-}
-
-#robot {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 100px;
-    cursor: pointer;
-}
+/* Robot (İş adamı stili) */
+#robot { position: fixed; right: 10px; bottom: 10px; width: 60px; transition: 0.3s; }
+.ates-cikiyor { filter: hue-rotate(90deg) brightness(1.5); }
