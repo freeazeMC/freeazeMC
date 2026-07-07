@@ -4,40 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NodeGuard - OSINT & Güvenlik Platformu</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3581301294764999" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="ad-banner">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3581301294764999" data-ad-slot="YOUR_AD_SLOT_1" data-full-width-responsive="true"></ins>
+    </div>
+
     <nav class="navbar">
-        <div class="logo">&gt;_ NodeGuard</div>
+        <div class="logo">
+            <span>&gt;_</span> NodeGuard
+        </div>
         <div class="nav-links">
-            <a onclick="showPage('dashboard', this)" class="active">Dashboard</a>
-            <a onclick="showPage('osint-page', this)">OSINT 2026</a>
-            <a onclick="showPage('ip-page', this)">IP Sorgu</a>
+            <a href="#" onclick="showDashboard()">Dashboard</a>
+            <a href="#" onclick="showOSINT()" class="active">OSINT</a>
+            <a href="#" onclick="showIPQuery()">IP Sorgu</a>
+            <a href="#" onclick="showLicense()">Lisans & Telif</a>
         </div>
     </nav>
 
+    <!-- DASHBOARD -->
     <div id="dashboard" class="page">
         <div class="container">
+            <h1 class="main-title">NodeGuard</h1>
+            <p class="subtitle">Profesyonel OSINT ve Siber Güvenlik İstihbarat Platformu</p>
+
             <div class="card">
-                <h1 class="main-title">NodeGuard</h1>
-                <p>NodeGuard, internet üzerindeki açık kaynaklı verileri (OSINT) analiz etmek, IP adreslerini izlemek ve siber tehditleri erkenden tespit etmek için Rxc Team tarafından geliştirilmiş profesyonel bir istihbarat platformudur. Platform, şüpheli ağ aktivitelerini takip etme, dijital ayak izi tarama ve gelişmiş güvenlik raporlama süreçlerini tek bir merkezde toplar.</p>
-                <a href="https://www.mediafire.com/file/yvu14y5enibz2zr/Tru_Mail_.apk/file" target="_blank" class="btn-download">▼ Tru Mail İndir</a>
+                <h2>Sistem Ne İşe Yarar?</h2>
+                <p>NodeGuard, girilen web siteleri ve IP adresleri hakkında detaylı istihbarat toplar. IP sorgulama, host bilgisi, konum analizi ve güvenlik zafiyet taraması yapar. Kendi VPN altyapımız ile desteklenmektedir.</p>
             </div>
-            
+
             <div class="card">
                 <h2>İsmi Geçenler</h2>
-                <div class="scrolling-container">
-                    <div class="scrolling-text">
-                        NodeGuard Developer<br>Onnly Freeaze<br>Rxc Team<br>Rxc Datav<br>Berkcxn<br>freeaze tiktok<br>Teşekkürler...
-                    </div>
+                <div id="credits" class="credits"></div>
+            </div>
+
+            <div class="card">
+                <h2>Tru Mail</h2>
+                <a href="https://www.mediafire.com/file/yvu14y5enibz2zr/Tru_Mail_.apk/file" target="_blank" class="btn-download">
+                    ↓ Tru Mail APK İndir
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- OSINT -->
+    <div id="osint-page" class="page" style="display: none;">
+        <div class="container">
+            <h1 class="main-title">OSINT Tarama</h1>
+            <div class="search-box">
+                <input type="text" id="targetInput" class="url-input" placeholder="https://example.com">
+                <button onclick="startOSINTScan()" class="btn-primary">OSINT Tara</button>
+            </div>
+            <div id="osint-results" class="results">
+                <div class="card">
+                    <h3>Log</h3>
+                    <div id="log" class="log-area"></div>
+                </div>
+                <div class="card">
+                    <h3>Rapor</h3>
+                    <div id="osint-report" class="report-area"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="osint-page" class="page"><div class="container"><div class="card"><h1>OSINT Paneli</h1></div></div></div>
-    <div id="ip-page" class="page"><div class="container"><div class="card"><h1>IP Sorgu</h1><div id="ip-report"></div></div></div></div>
+    <!-- IP SORGULAMA -->
+    <div id="ip-page" class="page" style="display: none;">
+        <div class="container">
+            <h1 class="main-title">IP Sorgu</h1>
+            <div class="search-box">
+                <input type="text" id="ipInput" class="url-input" placeholder="IP adresi girin">
+                <button onclick="startIPQuery()" class="btn-primary">Sorgula</button>
+            </div>
+            <div id="ip-results" class="results">
+                <div class="card">
+                    <div id="ip-report" class="report-area"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- LİSANS & TELİF -->
+    <div id="license-page" class="page" style="display: none;">
+        <div class="container">
+            <h1 class="main-title">Lisans & Telif Hakkı</h1>
+            <div class="card">
+                <h2>Telif Hakkı Sözleşmesi</h2>
+                <p>NodeGuard © 2026 NodeGuard Developer (Rxc Team) tarafından geliştirilmiştir. Tüm hakları saklıdır.</p>
+                <p>Bu platform sadece yetkili ekip üyeleri tarafından kullanılabilir. İzinsiz kopyalama, dağıtma, modifiye etme veya ticari amaçla kullanma yasaktır.</p>
+                <p>Kullanıcılar, araçtan doğabilecek tüm hukuki sorumlulukları kabul etmiş sayılır. Rxc Team, hiçbir şekilde hukuki sorumluluk kabul etmez.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
