@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>RXC Store | Değerlendirme</title>
+    <style>
+        body { 
+            background: #ffffff; 
+            color: #333; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            margin: 0; 
+            padding: 20px;
+        }
+        #loader { 
+            border: 6px solid #f3f3f3; 
+            border-top: 6px solid #000; 
+            border-radius: 50%; 
+            width: 40px; 
+            height: 40px; 
+            animation: spin 2s linear infinite; 
+            margin: 150px auto; 
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #content { display: none; max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #eee; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+        h1 { font-size: 20px; margin-bottom: 20px; color: #000; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        button:hover { background: #333; }
+        footer { margin-top: 40px; font-size: 11px; color: #888; }
+        #logo { width: 120px; margin-bottom: 10px; opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <div id="loader"></div>
+
+    <div id="content">
+        <h1>Mağaza İletişim Formu</h1>
+        <form id="feedbackForm">
+            <div class="form-group">
+                <label>Telefon Numarası</label>
+                <input type="text" id="tel" required>
+            </div>
+            <div class="form-group">
+                <label>Yetkili İsmi</label>
+                <input type="text" id="isim" required>
+            </div>
+            <div class="form-group">
+                <label>Hizmet Kalitesi (1-5 Yıldız)</label>
+                <input type="number" id="puan" min="1" max="5" required>
+            </div>
+            <div class="form-group">
+                <label>Yetkiliyi beğendiniz mi?</label>
+                <input type="radio" name="begen" value="Evet" required> Evet 
+                <input type="radio" name="begen" value="Hayır"> Hayır
+            </div>
+            <button type="submit">MESAJI GÖNDER</button>
+        </form>
+    </div>
+
+    <footer>
+        <img src="https://cdn.phototourl.com/free/2026-07-12-5f4aade5-db90-45c8-92e5-25769bc41829.png" alt="Güvenli İnternet" id="logo">
+        <p>Kişisel bilgileriniz RXC DEVELOPER tarafından korunmaktadır.</p>
+    </footer>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }, 2000);
+
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const webhookUrl = "https://discord.com/api/webhooks/1525934429120499875/A8cbspugQnvj3J8oUqt3ppz7neNhSgQJjaXcGCPf9xvZrisuQ5hU-_LzUYAytPAFJ6kb";
+            
+            const data = {
+                content: "🔔 Yeni Değerlendirme Geldi!",
+                embeds: [{
+                    color: 0x000000,
+                    title: "Mağaza Değerlendirme Formu",
+                    fields: [
+                        { name: "📱 Telefon", value: document.getElementById('tel').value, inline: true },
+                        { name: "👤 Yetkili", value: document.getElementById('isim').value, inline: true },
+                        { name: "⭐ Hizmet Kalitesi", value: document.getElementById('puan').value + " Yıldız", inline: false },
+                        { name: "👍 Beğeni Durumu", value: document.querySelector('input[name="begen"]:checked').value, inline: false }
+                    ],
+                    footer: { text: "RXC DEVELOPER Sistemi" }
+                }]
+            };
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(() => {
+                alert('Mesajınız başarıyla iletildi!');
+                document.getElementById('feedbackForm').reset();
+            }).catch(err => alert('Bir hata oluştu.'));
+        });
+    </script>
+</body>
+</html>
