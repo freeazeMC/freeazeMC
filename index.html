@@ -2,88 +2,32 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>NodeGuard</title>
+    <title>NodeGuard - İlanlar</title>
     <style>
-        body { font-family: sans-serif; background: #f8f9fa; margin: 0; padding: 15px; color: #333; }
-        .nav { display: flex; justify-content: space-around; margin-bottom: 20px; }
-        .card { background: #fff; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 10px; }
-        .input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        .btn { background: #007bff; color: #fff; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
-        .vpn-uyari { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; font-size: 12px; margin-bottom: 10px; border: 1px solid #ffeeba; }
+        body { font-family: sans-serif; padding: 20px; }
+        .ilan-karti { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; background: #f9f9f9; }
     </style>
 </head>
 <body>
-
-    <div class="nav">
-        <button onclick="show('pazar')">İlanlar</button>
-        <button onclick="show('destek')">Destek/Şikayet</button>
-    </div>
-
-    <!-- İLAN PAZARI -->
-    <div id="pazar">
-        <div id="ilanListesi">Yükleniyor...</div>
-    </div>
-
-    <!-- DESTEK SİSTEMİ -->
-    <div id="destek" style="display:none;">
-        <div class="vpn-uyari">
-            ⚠️ VPN açıksa sorun yaşayabilirsin. WhatsApp: <b>+30 697 054 8430</b>
-        </div>
-        <input class="input" id="sorun" placeholder="Sorunun Nedir?">
-        <input class="input" id="tel" placeholder="Telefon Numaran">
-        <input class="input" id="foto" placeholder="SS (Fotoğraf Linki)">
-        <button class="btn" onclick="webhookGonder()">Gönder</button>
-    </div>
+    <h1>Yayındaki İlanlar</h1>
+    <div id="ilanListesi"></div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyC4zsx3SS7vBEUB9KnWUdnfB9ovKCSJ320",
-            authDomain: "ilanpazari-8d8c1.firebaseapp.com",
-            projectId: "ilanpazari-8d8c1",
-            storageBucket: "ilanpazari-8d8c1.firebasestorage.app",
-            messagingSenderId: "684347969650",
-            appId: "1:684347969650:web:55953647ec2da24aa932eb"
-        };
-        const db = getFirestore(initializeApp(firebaseConfig));
+        // BURAYA FIREBASE CONFIG BİLGİNİ YAZ
+        const app = initializeApp({ /* ... */ });
+        const db = getFirestore(app);
 
-        // Sayfa geçişleri
-        window.show = (id) => {
-            document.getElementById('pazar').style.display = id == 'pazar' ? 'block' : 'none';
-            document.getElementById('destek').style.display = id == 'destek' ? 'block' : 'none';
-        };
-
-        // İlanları listele
-        onSnapshot(collection(db, "ilanlar"), (snap) => {
-            let html = "";
-            snap.forEach(d => { 
-                let data = d.data(); 
-                html += `<div class="card"><h3>${data.isim}</h3><p>${data.aciklama}</p><button class="btn" onclick="alert('Tel: ${data.tel}')">Numarayı Gör</button></div>`; 
+        onSnapshot(collection(db, "ilanlar"), (snapshot) => {
+            const liste = document.getElementById('ilanListesi');
+            liste.innerHTML = "";
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                liste.innerHTML += `<div class="ilan-karti"><b>${data.isim}</b><br>${data.aciklama}<br>WhatsApp: ${data.tel}</div>`;
             });
-            document.getElementById('ilanListesi').innerHTML = html;
         });
-
-        // Webhook Destek Gönderimi
-        window.webhookGonder = async () => {
-            const url = "https://discord.com/api/webhooks/1525934429120499875/A8cbspugQnvj3J8oUqt3ppz7neNhSgQJjaXcGCPf9xvZrisuQ5hU-_LzUYAytPAFJ6kb";
-            await fetch(url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    embeds: [{
-                        title: "🚨 Yeni Şikayet/Destek",
-                        fields: [
-                            { name: "Sorun", value: document.getElementById('sorun').value },
-                            { name: "Telefon", value: document.getElementById('tel').value },
-                            { name: "Fotoğraf", value: document.getElementById('foto').value }
-                        ]
-                    }]
-                })
-            });
-            alert("Talebin iletildi!");
-        };
     </script>
 </body>
 </html>
