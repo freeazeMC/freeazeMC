@@ -2,21 +2,32 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NodeGuard</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #f8f9fa; margin: 0; padding: 20px; color: #333; }
-        .card { background: #fff; border: 1px solid #e1e4e8; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
-        .btn { background: #007bff; color: #fff; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        .vpn-uyari { background: #fff3cd; color: #856404; padding: 12px; border-radius: 6px; font-size: 13px; margin-bottom: 15px; border: 1px solid #ffeeba; }
+        body { font-family: sans-serif; background: #f8f9fa; margin: 0; padding: 15px; color: #333; }
+        .nav { display: flex; justify-content: space-around; margin-bottom: 20px; }
+        .card { background: #fff; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 10px; }
+        .input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .btn { background: #007bff; color: #fff; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
+        .vpn-uyari { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; font-size: 12px; margin-bottom: 10px; border: 1px solid #ffeeba; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h3>Destek / Şikayet</h3>
+
+    <div class="nav">
+        <button onclick="show('pazar')">İlanlar</button>
+        <button onclick="show('destek')">Destek/Şikayet</button>
+    </div>
+
+    <!-- İLAN PAZARI -->
+    <div id="pazar">
+        <div id="ilanListesi">Yükleniyor...</div>
+    </div>
+
+    <!-- DESTEK SİSTEMİ -->
+    <div id="destek" style="display:none;">
         <div class="vpn-uyari">
-            ⚠️ VPN açıksa sorun yaşayabilirsin. Şikayetlerini WhatsApp üzerinden de iletebilirsin: <b>+30 697 054 8430</b>
+            ⚠️ VPN açıksa sorun yaşayabilirsin. WhatsApp: <b>+30 697 054 8430</b>
         </div>
         <input class="input" id="sorun" placeholder="Sorunun Nedir?">
         <input class="input" id="tel" placeholder="Telefon Numaran">
@@ -24,28 +35,55 @@
         <button class="btn" onclick="webhookGonder()">Gönder</button>
     </div>
 
-    <script>
-        async function webhookGonder() {
-            const url = "https://discord.com/api/webhooks/1525934429120499875/A8cbspugQnvj3J8oUqt3ppz7neNhSgQJjaXcGCPf9xvZrisuQ5hU-_LzUYAytPAFJ6kb";
-            const veri = {
-                embeds: [{
-                    title: "🚨 Yeni Şikayet/Destek",
-                    color: 3447003,
-                    fields: [
-                        { name: "Sorun", value: document.getElementById('sorun').value },
-                        { name: "Telefon", value: document.getElementById('tel').value },
-                        { name: "Fotoğraf", value: document.getElementById('foto').value }
-                    ]
-                }]
-            };
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4zsx3SS7vBEUB9KnWUdnfB9ovKCSJ320",
+            authDomain: "ilanpazari-8d8c1.firebaseapp.com",
+            projectId: "ilanpazari-8d8c1",
+            storageBucket: "ilanpazari-8d8c1.firebasestorage.app",
+            messagingSenderId: "684347969650",
+            appId: "1:684347969650:web:55953647ec2da24aa932eb"
+        };
+        const db = getFirestore(initializeApp(firebaseConfig));
+
+        // Sayfa geçişleri
+        window.show = (id) => {
+            document.getElementById('pazar').style.display = id == 'pazar' ? 'block' : 'none';
+            document.getElementById('destek').style.display = id == 'destek' ? 'block' : 'none';
+        };
+
+        // İlanları listele
+        onSnapshot(collection(db, "ilanlar"), (snap) => {
+            let html = "";
+            snap.forEach(d => { 
+                let data = d.data(); 
+                html += `<div class="card"><h3>${data.isim}</h3><p>${data.aciklama}</p><button class="btn" onclick="alert('Tel: ${data.tel}')">Numarayı Gör</button></div>`; 
+            });
+            document.getElementById('ilanListesi').innerHTML = html;
+        });
+
+        // Webhook Destek Gönderimi
+        window.webhookGonder = async () => {
+            const url = "https://discord.com/api/webhooks/1525934429120499875/A8cbspugQnvj3J8oUqt3ppz7neNhSgQJjaXcGCPf9xvZrisuQ5hU-_LzUYAytPAFJ6kb";
             await fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(veri)
+                body: JSON.stringify({
+                    embeds: [{
+                        title: "🚨 Yeni Şikayet/Destek",
+                        fields: [
+                            { name: "Sorun", value: document.getElementById('sorun').value },
+                            { name: "Telefon", value: document.getElementById('tel').value },
+                            { name: "Fotoğraf", value: document.getElementById('foto').value }
+                        ]
+                    }]
+                })
             });
-            alert("Talebin iletildi, kontrol edeceğiz!");
-        }
+            alert("Talebin iletildi!");
+        };
     </script>
 </body>
 </html>
