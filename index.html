@@ -2,93 +2,110 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>NodeGuard | Yönetim Paneli</title>
+    <title>NodeGuard | İlan & Destek Pazarı</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; text-align: center; }
-        .loader-screen { position: fixed; inset: 0; background: white; z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #2c3e50; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 10px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* Tasarım - Dark Mode */
+        body { background: #121212; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; }
+        .vpn-alert { background: #e74c3c; padding: 12px; text-align: center; font-weight: bold; border-bottom: 2px solid #c0392b; }
+        .nav { background: #1e1e1e; padding: 15px; display: flex; justify-content: center; gap: 15px; }
+        button { background: #333; color: white; padding: 10px 20px; border: 1px solid #444; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #444; }
         
-        /* Şık Kategoriler */
-        .nav { background: #2c3e50; padding: 10px; display: flex; justify-content: center; gap: 10px; }
-        .nav button { background: #34495e; border: 1px solid #7f8c8d; color: white; padding: 8px 15px; cursor: pointer; border-radius: 4px; font-size: 13px; transition: 0.3s; }
-        .nav button:hover { background: #1abc9c; }
-
-        #content { max-width: 450px; margin: 30px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        input, textarea, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button.submit { background: #2c3e50; color: white; border: none; padding: 12px; cursor: pointer; width: 100%; font-weight: bold; }
-        footer { font-size: 11px; color: #999; margin-top: 20px; }
-        #logo { width: 80px; }
+        .container { max-width: 700px; margin: 20px auto; padding: 20px; }
+        .card { background: #252525; padding: 20px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #333; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 8px 0; background: #333; border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; }
+        .btn-green { background: #27ae60; border: none; font-weight: bold; width: 100%; padding: 12px; cursor: pointer; margin-top: 10px; }
+        .btn-green:hover { background: #2ecc71; }
     </style>
 </head>
 <body>
 
-    <div id="loader-start" class="loader-screen">
-        <div class="spinner"></div>
-        <div id="info-text">NodeGuard Shop hazırlanıyor...</div>
-    </div>
+    <div class="vpn-alert">⚠ Discord entegrasyonu ve Firebase erişimi için VPN kullanmanız önerilir!</div>
 
     <div class="nav">
-        <button onclick="showPage('siparis')">Sipariş</button>
-        <button onclick="showPage('degerlendirme')">Değerlendirme</button>
-        <button onclick="showPage('sikayet')">Şikayet</button>
+        <button onclick="show('ilanlar')">İlan Pazarı</button>
+        <button onclick="show('ekle')">İlan Ekle</button>
+        <button onclick="show('destek')">Destek / Şikayet</button>
     </div>
 
-    <div id="content">
-        <!-- Sipariş -->
-        <div id="siparis" class="page">
-            <h3>Sipariş Formu</h3>
-            <input type="text" id="tel" placeholder="Telefon Numaranız">
-            <input type="text" id="app" placeholder="Uygulama Adı">
-            <textarea id="istek" placeholder="Nasıl bir hesap istiyorsunuz?"></textarea>
-            <label style="font-size:12px">Referans/Ekran Görüntüsü:</label>
-            <input type="file" id="dosyaSiparis">
-            <button class="submit" onclick="submitForm('Sipariş')">GÖNDER</button>
+    <div class="container">
+        <!-- İlan Pazarı -->
+        <div id="ilanlar">
+            <h2>İlan Pazarı</h2>
+            <div id="ilanListesi">Veriler yükleniyor...</div>
         </div>
 
-        <!-- Değerlendirme -->
-        <div id="degerlendirme" class="page" style="display:none;">
-            <h3>Değerlendirme</h3>
+        <!-- İlan Ekleme -->
+        <div id="ekle" style="display:none;">
+            <h2>İlan Oluştur</h2>
+            <input type="text" id="isim" placeholder="İlan İsmi">
+            <input type="text" id="tel" placeholder="WhatsApp Numaranız">
+            <textarea id="aciklama" placeholder="İlan Açıklaması (Takas detayları)"></textarea>
+            <button class="btn-green" onclick="submitIlan()">İlanı Yayına Al</button>
+        </div>
+
+        <!-- Destek -->
+        <div id="destek" style="display:none;">
+            <h2>Destek & Şikayet</h2>
             <input type="text" id="yetkili" placeholder="Yetkili İsmi">
-            <select id="puan"><option>1 Yıldız</option><option>5 Yıldız</option></select>
-            <label>Memnun kaldınız mı?</label>
-            <select id="memnun"><option>Evet</option><option>Hayır</option></select>
-            <label style="font-size:12px">Kanıt/SS Yükle:</label>
-            <input type="file" id="dosyaDeger">
-            <button class="submit" onclick="submitForm('Değerlendirme')">GÖNDER</button>
-        </div>
-
-        <!-- Şikayet -->
-        <div id="sikayet" class="page" style="display:none;">
-            <h3>Yetkili Şikayet</h3>
-            <input type="text" id="sikayetNeden" placeholder="Şikayet Nedeni">
-            <input type="text" id="sikayetYetkili" placeholder="Yetkili İsmi">
-            <label style="font-size:12px">Kanıt SS:</label>
-            <input type="file" id="dosyaSikayet">
-            <button class="submit" onclick="submitForm('Şikayet')">GÖNDER</button>
+            <textarea id="neden" placeholder="Şikayet/Destek Nedeni"></textarea>
+            <select id="puan"><option value="1">1 Puan</option><option value="5">5 Puan</option></select>
+            <button class="btn-green" onclick="submitDestek()">Gönder</button>
         </div>
     </div>
 
-    <footer>
-        <img src="https://cdn.phototourl.com/free/2026-07-12-5f4aade5-db90-45c8-92e5-25769bc41829.png" id="logo"><br>
-        RXC DEVELOPER tarafından korunmaktadır.
-    </footer>
+    <!-- Firebase ve JavaScript -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-    <script>
-        // Yükleme ekranı mantığı
-        const infos = ["NodeGuard en çok tercih edilen satıcıdır", "Sitede aktif 103 satıcı var", "15 dakikada teslimat", "44 aktif yetkili"];
-        let i = 0;
-        setInterval(() => { document.getElementById('info-text').innerText = infos[i++ % infos.length]; }, 1400);
-        setTimeout(() => { document.getElementById('loader-start').style.display = 'none'; }, 7000);
+        // Senin Firebase Config Kodların
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4zsx3SS7vBEUB9KnWUdnfB9ovKCSJ320",
+            authDomain: "ilanpazari-8d8c1.firebaseapp.com",
+            projectId: "ilanpazari-8d8c1",
+            storageBucket: "ilanpazari-8d8c1.firebasestorage.app",
+            messagingSenderId: "684347969650",
+            appId: "1:684347969650:web:55953647ec2da24aa932eb"
+        };
 
-        function showPage(id) {
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+        const db = getFirestore(initializeApp(firebaseConfig));
+
+        // Sayfa Değiştirme
+        window.show = (id) => {
+            document.querySelectorAll('.container > div').forEach(d => d.style.display = 'none');
             document.getElementById(id).style.display = 'block';
-        }
+        };
 
-        function submitForm(type) {
-            alert(type + ' formu başarıyla iletildi!');
-        }
+        // İlan Ekleme
+        window.submitIlan = async () => {
+            await addDoc(collection(db, "ilanlar"), {
+                isim: document.getElementById('isim').value,
+                tel: document.getElementById('tel').value,
+                aciklama: document.getElementById('aciklama').value
+            });
+            alert("İlanınız başarıyla eklendi!");
+        };
+
+        // Destek Ekleme
+        window.submitDestek = async () => {
+            await addDoc(collection(db, "destek"), {
+                yetkili: document.getElementById('yetkili').value,
+                neden: document.getElementById('neden').value,
+                puan: document.getElementById('puan').value
+            });
+            alert("Destek talebiniz ulaştı!");
+        };
+
+        // İlanları Anlık Listeleme
+        onSnapshot(collection(db, "ilanlar"), (snap) => {
+            let html = "";
+            snap.forEach(d => {
+                let data = d.data();
+                html += `<div class="card"><h3>${data.isim}</h3><p>${data.aciklama}</p><button onclick="navigator.clipboard.writeText('${data.tel}')">Yetkili Numarasını Kopyala</button></div>`;
+            });
+            document.getElementById('ilanListesi').innerHTML = html;
+        });
     </script>
 </body>
 </html>
