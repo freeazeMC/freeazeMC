@@ -2,100 +2,93 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>NodeGuard Shop</title>
+    <title>NodeGuard | Yönetim Paneli</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; background: #fff; }
-        .loader-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .spinner { border: 6px solid #f3f3f3; border-top: 6px solid #0056b3; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; text-align: center; }
+        .loader-screen { position: fixed; inset: 0; background: white; z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #2c3e50; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 10px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .nav { background: #0056b3; padding: 15px; display: flex; justify-content: center; gap: 20px; }
-        .nav button { background: none; border: none; color: white; font-weight: bold; cursor: pointer; font-size: 16px; }
-        #content { max-width: 400px; margin: 40px auto; padding: 20px; border: 1px solid #ddd; }
-        input, textarea, button { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
-        button.submit { background: #0056b3; color: white; border: none; cursor: pointer; }
-        footer { margin-top: 50px; font-size: 12px; color: #777; }
-        #logo { width: 100px; }
+        
+        /* Şık Kategoriler */
+        .nav { background: #2c3e50; padding: 10px; display: flex; justify-content: center; gap: 10px; }
+        .nav button { background: #34495e; border: 1px solid #7f8c8d; color: white; padding: 8px 15px; cursor: pointer; border-radius: 4px; font-size: 13px; transition: 0.3s; }
+        .nav button:hover { background: #1abc9c; }
+
+        #content { max-width: 450px; margin: 30px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input, textarea, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button.submit { background: #2c3e50; color: white; border: none; padding: 12px; cursor: pointer; width: 100%; font-weight: bold; }
+        footer { font-size: 11px; color: #999; margin-top: 20px; }
+        #logo { width: 80px; }
     </style>
 </head>
 <body>
 
     <div id="loader-start" class="loader-screen">
         <div class="spinner"></div>
-        <div id="info-text">NodeGuard Shop'a hoş geldiniz...</div>
-    </div>
-
-    <div id="loader-nav" class="loader-screen" style="display:none;">
-        <div class="spinner"></div>
-        <p>Yükleniyor...</p>
+        <div id="info-text">NodeGuard Shop hazırlanıyor...</div>
     </div>
 
     <div class="nav">
-        <button onclick="showPage('siparis')">Sipariş Formu</button>
-        <button onclick="showPage('degerlendirme')">Değerlendirme Formu</button>
+        <button onclick="showPage('siparis')">Sipariş</button>
+        <button onclick="showPage('degerlendirme')">Değerlendirme</button>
+        <button onclick="showPage('sikayet')">Şikayet</button>
     </div>
 
     <div id="content">
+        <!-- Sipariş -->
         <div id="siparis" class="page">
-            <h1>Sipariş Formu</h1>
-            <form id="formSiparis">
-                <input type="text" id="tel" placeholder="Telefon Numarası" required>
-                <input type="text" id="app" placeholder="Uygulama Adı" required>
-                <textarea id="istek" placeholder="Nasıl bir hesap istiyorsunuz?"></textarea>
-                <button type="submit" class="submit">GÖNDER</button>
-            </form>
+            <h3>Sipariş Formu</h3>
+            <input type="text" id="tel" placeholder="Telefon Numaranız">
+            <input type="text" id="app" placeholder="Uygulama Adı">
+            <textarea id="istek" placeholder="Nasıl bir hesap istiyorsunuz?"></textarea>
+            <label style="font-size:12px">Referans/Ekran Görüntüsü:</label>
+            <input type="file" id="dosyaSiparis">
+            <button class="submit" onclick="submitForm('Sipariş')">GÖNDER</button>
         </div>
 
+        <!-- Değerlendirme -->
         <div id="degerlendirme" class="page" style="display:none;">
-            <h1>Değerlendirme</h1>
-            <form id="formDegerlendirme">
-                <input type="text" id="yetkili" placeholder="Yetkili İsmi" required>
-                <input type="number" id="puan" min="1" max="5" placeholder="Puan (1-5)">
-                <button type="submit" class="submit">GÖNDER</button>
-            </form>
+            <h3>Değerlendirme</h3>
+            <input type="text" id="yetkili" placeholder="Yetkili İsmi">
+            <select id="puan"><option>1 Yıldız</option><option>5 Yıldız</option></select>
+            <label>Memnun kaldınız mı?</label>
+            <select id="memnun"><option>Evet</option><option>Hayır</option></select>
+            <label style="font-size:12px">Kanıt/SS Yükle:</label>
+            <input type="file" id="dosyaDeger">
+            <button class="submit" onclick="submitForm('Değerlendirme')">GÖNDER</button>
+        </div>
+
+        <!-- Şikayet -->
+        <div id="sikayet" class="page" style="display:none;">
+            <h3>Yetkili Şikayet</h3>
+            <input type="text" id="sikayetNeden" placeholder="Şikayet Nedeni">
+            <input type="text" id="sikayetYetkili" placeholder="Yetkili İsmi">
+            <label style="font-size:12px">Kanıt SS:</label>
+            <input type="file" id="dosyaSikayet">
+            <button class="submit" onclick="submitForm('Şikayet')">GÖNDER</button>
         </div>
     </div>
 
     <footer>
-        <img src="https://cdn.phototourl.com/free/2026-07-12-5f4aade5-db90-45c8-92e5-25769bc41829.png" alt="Güvenli İnternet" id="logo">
-        <p>Kişisel bilgileriniz RXC DEVELOPER tarafından korunmaktadır.</p>
+        <img src="https://cdn.phototourl.com/free/2026-07-12-5f4aade5-db90-45c8-92e5-25769bc41829.png" id="logo"><br>
+        RXC DEVELOPER tarafından korunmaktadır.
     </footer>
 
     <script>
-        const webhookUrl = "https://discord.com/api/webhooks/1525934429120499875/A8cbspugQnvj3J8oUqt3ppz7neNhSgQJjaXcGCPf9xvZrisuQ5hU-_LzUYAytPAFJ6kb";
-        
-        const infos = ["NodeGuard en çok tercih edilen ve 4.5 puanlı bir satıcıdır", "Sitede aktif olarak 103 satıcı vardır", "Yetkililer sadece 15 dakikada hizmet verir", "Site sadece 1 kişi tarafından açılmıştır", "Aktif olarak 44 yetkili bulunur"];
+        // Yükleme ekranı mantığı
+        const infos = ["NodeGuard en çok tercih edilen satıcıdır", "Sitede aktif 103 satıcı var", "15 dakikada teslimat", "44 aktif yetkili"];
         let i = 0;
-        const infoEl = document.getElementById('info-text');
-        
-        const interval = setInterval(() => { infoEl.innerText = infos[i++ % infos.length]; }, 1400);
-        setTimeout(() => { document.getElementById('loader-start').style.display = 'none'; clearInterval(interval); }, 7000);
+        setInterval(() => { document.getElementById('info-text').innerText = infos[i++ % infos.length]; }, 1400);
+        setTimeout(() => { document.getElementById('loader-start').style.display = 'none'; }, 7000);
 
-        function showPage(pageId) {
-            document.getElementById('loader-nav').style.display = 'flex';
-            setTimeout(() => {
-                document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-                document.getElementById(pageId).style.display = 'block';
-                document.getElementById('loader-nav').style.display = 'none';
-            }, 3000);
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
         }
 
-        function sendWebhook(data) {
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            }).then(() => alert('Mesaj başarıyla iletildi!'));
+        function submitForm(type) {
+            alert(type + ' formu başarıyla iletildi!');
         }
-
-        document.getElementById('formSiparis').onsubmit = (e) => { 
-            e.preventDefault(); 
-            sendWebhook({ content: "Yeni Sipariş: " + document.getElementById('tel').value + " - " + document.getElementById('istek').value });
-        };
-
-        document.getElementById('formDegerlendirme').onsubmit = (e) => { 
-            e.preventDefault(); 
-            sendWebhook({ content: "Yeni Değerlendirme: " + document.getElementById('yetkili').value + " Puan: " + document.getElementById('puan').value });
-        };
     </script>
 </body>
 </html>
