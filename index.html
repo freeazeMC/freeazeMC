@@ -2,64 +2,51 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>NodeGuard | İlan & Destek Pazarı</title>
+    <title>NodeGuard | İlan & Destek</title>
     <style>
-        /* Tasarım - Dark Mode */
-        body { background: #121212; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; }
-        .vpn-alert { background: #e74c3c; padding: 12px; text-align: center; font-weight: bold; border-bottom: 2px solid #c0392b; }
-        .nav { background: #1e1e1e; padding: 15px; display: flex; justify-content: center; gap: 15px; }
-        button { background: #333; color: white; padding: 10px 20px; border: 1px solid #444; border-radius: 5px; cursor: pointer; }
-        button:hover { background: #444; }
-        
-        .container { max-width: 700px; margin: 20px auto; padding: 20px; }
-        .card { background: #252525; padding: 20px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #333; }
-        input, textarea, select { width: 100%; padding: 12px; margin: 8px 0; background: #333; border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; }
-        .btn-green { background: #27ae60; border: none; font-weight: bold; width: 100%; padding: 12px; cursor: pointer; margin-top: 10px; }
-        .btn-green:hover { background: #2ecc71; }
+        body { background: #121212; color: #fff; font-family: sans-serif; margin: 0; }
+        .nav { background: #1e1e1e; padding: 15px; display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #333; }
+        .container { max-width: 600px; margin: 20px auto; padding: 20px; }
+        .card { background: #252525; padding: 15px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #333; }
+        input, textarea { width: 100%; padding: 10px; margin: 5px 0; background: #333; border: none; color: white; border-radius: 4px; box-sizing: border-box; }
+        .btn-green { background: #27ae60; width: 100%; padding: 12px; border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 4px; }
+        #mesajlar { height: 200px; background: #1a1a1a; overflow-y: scroll; padding: 10px; border-radius: 5px; margin-bottom: 10px; border: 1px solid #333; }
     </style>
 </head>
 <body>
 
-    <div class="vpn-alert">⚠ Discord entegrasyonu ve Firebase erişimi için VPN kullanmanız önerilir!</div>
-
     <div class="nav">
-        <button onclick="show('ilanlar')">İlan Pazarı</button>
+        <button onclick="show('ilanlar')">Pazar</button>
         <button onclick="show('ekle')">İlan Ekle</button>
-        <button onclick="show('destek')">Destek / Şikayet</button>
+        <button onclick="show('destek')">Canlı Destek</button>
     </div>
 
     <div class="container">
-        <!-- İlan Pazarı -->
+        <!-- İlanlar -->
         <div id="ilanlar">
-            <h2>İlan Pazarı</h2>
-            <div id="ilanListesi">Veriler yükleniyor...</div>
+            <div id="ilanListesi"></div>
         </div>
 
         <!-- İlan Ekleme -->
         <div id="ekle" style="display:none;">
-            <h2>İlan Oluştur</h2>
-            <input type="text" id="isim" placeholder="İlan İsmi">
-            <input type="text" id="tel" placeholder="WhatsApp Numaranız">
-            <textarea id="aciklama" placeholder="İlan Açıklaması (Takas detayları)"></textarea>
-            <button class="btn-green" onclick="submitIlan()">İlanı Yayına Al</button>
+            <input type="text" id="isim" placeholder="İlan Başlığı">
+            <input type="text" id="tel" placeholder="WhatsApp Numarası">
+            <textarea id="aciklama" placeholder="Detaylar"></textarea>
+            <button class="btn-green" onclick="submitIlan()">İlanı Yayınla</button>
         </div>
 
-        <!-- Destek -->
+        <!-- Canlı Destek -->
         <div id="destek" style="display:none;">
-            <h2>Destek & Şikayet</h2>
-            <input type="text" id="yetkili" placeholder="Yetkili İsmi">
-            <textarea id="neden" placeholder="Şikayet/Destek Nedeni"></textarea>
-            <select id="puan"><option value="1">1 Puan</option><option value="5">5 Puan</option></select>
-            <button class="btn-green" onclick="submitDestek()">Gönder</button>
+            <div id="mesajlar"></div>
+            <input type="text" id="mesajInput" placeholder="Mesajını yaz...">
+            <button class="btn-green" onclick="mesajGonder()">Gönder</button>
         </div>
     </div>
 
-    <!-- Firebase ve JavaScript -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        // Senin Firebase Config Kodların
         const firebaseConfig = {
             apiKey: "AIzaSyC4zsx3SS7vBEUB9KnWUdnfB9ovKCSJ320",
             authDomain: "ilanpazari-8d8c1.firebaseapp.com",
@@ -71,40 +58,37 @@
 
         const db = getFirestore(initializeApp(firebaseConfig));
 
-        // Sayfa Değiştirme
         window.show = (id) => {
             document.querySelectorAll('.container > div').forEach(d => d.style.display = 'none');
             document.getElementById(id).style.display = 'block';
         };
 
-        // İlan Ekleme
         window.submitIlan = async () => {
             await addDoc(collection(db, "ilanlar"), {
                 isim: document.getElementById('isim').value,
                 tel: document.getElementById('tel').value,
                 aciklama: document.getElementById('aciklama').value
             });
-            alert("İlanınız başarıyla eklendi!");
+            alert("İlan eklendi!");
         };
 
-        // Destek Ekleme
-        window.submitDestek = async () => {
-            await addDoc(collection(db, "destek"), {
-                yetkili: document.getElementById('yetkili').value,
-                neden: document.getElementById('neden').value,
-                puan: document.getElementById('puan').value
-            });
-            alert("Destek talebiniz ulaştı!");
+        window.mesajGonder = async () => {
+            const msg = document.getElementById('mesajInput').value;
+            if(!msg) return;
+            await addDoc(collection(db, "destek_mesajlari"), { mesaj: msg, zaman: new Date().getTime() });
+            document.getElementById('mesajInput').value = "";
         };
 
-        // İlanları Anlık Listeleme
         onSnapshot(collection(db, "ilanlar"), (snap) => {
             let html = "";
-            snap.forEach(d => {
-                let data = d.data();
-                html += `<div class="card"><h3>${data.isim}</h3><p>${data.aciklama}</p><button onclick="navigator.clipboard.writeText('${data.tel}')">Yetkili Numarasını Kopyala</button></div>`;
-            });
+            snap.forEach(d => { let data = d.data(); html += `<div class="card"><h3>${data.isim}</h3><p>${data.aciklama}</p><button class="btn-green" onclick="navigator.clipboard.writeText('${data.tel}')">Numarayı Kopyala</button></div>`; });
             document.getElementById('ilanListesi').innerHTML = html;
+        });
+
+        onSnapshot(query(collection(db, "destek_mesajlari"), orderBy("zaman")), (snap) => {
+            let chatHtml = "";
+            snap.forEach(d => { chatHtml += `<p style="border-bottom:1px solid #333">💬 ${d.data().mesaj}</p>`; });
+            document.getElementById('mesajlar').innerHTML = chatHtml;
         });
     </script>
 </body>
